@@ -1,20 +1,95 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Auxiliar de Denúncias Online</title>]
+    <title>Sistema Auxiliar de Denúncias</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main>
-        <h1>Sistema Auxiliar de Denúncias Online</h1>
-       
-        <p>Um lugar para auxiliar mulheres em situações de violência online</p>
-       
-        <button>Começar</button>
+
+    <!-- Tela inicial -->
+    <main class="tela-inicial">
+        <div class="imagem">
+            <img src="escudo.png" alt="Escudo rosa e vermelho">
+        </div>
+
+        <section class="conteudo">
+            <h1>Bem-vindo!</h1>
+
+            <p>
+                Sua segurança importa.<br>
+                Estamos aqui para te apoiar.
+            </p>
+
+            <div class="botoes">
+                <button id="botaoComecar">Começar</button>
+                <a href="#" id="saibaMais">Saiba mais</a>
+            </div>
+        </section>
     </main>
 
+    <!-- Tela principal do sistema -->
+    <section class="tela-apoio" id="tela-apoio" hidden>
 
+        <header class="cabecalho-apoio">
+            <img src="escudo.png" alt="Logo do sistema">
+
+            <div>
+                <h1>Olá, Ana!</h1>
+                <p>Para onde iremos hoje?</p>
+            </div>
+        </header>
+
+        <a href="#" class="ajuda-emergencia">
+            <span class="icone-emergencia">♡</span>
+
+            <div>
+                <h2>Precisa de ajuda agora?</h2>
+                <p>Acolhimento imediato, anônimo e gratuito.</p>
+            </div>
+
+            <span class="seta">→</span>
+        </a>
+
+        <h2 class="titulo-opcoes">O que você deseja fazer?</h2>
+
+        <div class="opcoes-apoio">
+
+            <button class="cartao">
+                <span class="icone rosa">✎</span>
+                <strong>Fazer uma denúncia</strong>
+                <span>Inicie um relato seguro e anônimo.</span>
+            </button>
+
+            <button class="cartao">
+                <span class="icone azul">♧</span>
+                <strong>Acompanhar denúncias</strong>
+                <span>Veja o andamento e as atualizações de relatos enviados.</span>
+            </button>
+
+            <button class="cartao">
+                <span class="icone rosa">♡</span>
+                <strong>Recursos e apoio</strong>
+                <span>Canais de ajuda, apoio psicológico e jurídico.</span>
+            </button>
+
+            <button class="cartao">
+                <span class="icone amarelo">▤</span>
+                <strong>Sobre direitos</strong>
+                <span>Conheça as leis, os direitos das mulheres e cartilhas.</span>
+            </button>
+
+        </div>
+
+        <a href="#" class="aviso-ajuda">
+            <span>Precisa de ajuda agora? Acolhimento imediato e gratuito 24h</span>
+            <span>→</span>
+        </a>
+
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
