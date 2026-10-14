@@ -10,84 +10,104 @@
 <body>
 
     <!-- Tela inicial -->
-    <main class="tela-inicial">
-        <div class="imagem">
-            <img src="escudo.png" alt="Escudo rosa e vermelho">
-        </div>
+    <main class="tela tela-inicial" id="inicio">
+        <img src="escudo.png" alt="Logo do sistema">
 
-        <section class="conteudo">
+        <div>
             <h1>Bem-vindo!</h1>
+            <p>Sua segurança importa.<br>Estamos aqui para te apoiar.</p>
 
-            <p>
-                Sua segurança importa.<br>
-                Estamos aqui para te apoiar.
-            </p>
-
-            <div class="botoes">
-                <button id="botaoComecar">Começar</button>
-                <a href="#" id="saibaMais">Saiba mais</a>
-            </div>
-        </section>
+            <button onclick="mostrarTela('login')">Começar</button>
+            <br>
+            <a href="#" onclick="mostrarTela('login')">Saiba mais</a>
+        </div>
     </main>
 
-    <!-- Tela principal do sistema -->
-    <section class="tela-apoio" id="tela-apoio" hidden>
+    <!-- Tela de login -->
+    <section class="tela formulario" id="login" hidden>
+        <img class="logo" src="escudo.png" alt="Logo do sistema">
 
+        <h2>Bem-vinda!</h2>
+        <p>Faça login para continuar.</p>
+
+        <form id="formLogin">
+            <input type="email" id="emailLogin" placeholder="E-mail ou telefone" required>
+            <input type="password" id="senhaLogin" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+
+        <p class="trocar-tela">
+            Não tem uma conta?
+            <a href="#" onclick="mostrarTela('cadastro')">Criar conta</a>
+        </p>
+    </section>
+
+    <!-- Tela de cadastro -->
+    <section class="tela formulario" id="cadastro" hidden>
+        <img class="logo" src="escudo.png" alt="Logo do sistema">
+
+        <h2>Bem-vinda!</h2>
+        <p>Crie sua conta para continuar.</p>
+
+        <form id="formCadastro">
+            <input type="text" id="nomeCadastro" placeholder="Nome completo" required>
+            <input type="email" id="emailCadastro" placeholder="E-mail ou telefone" required>
+            <input type="password" id="senhaCadastro" placeholder="Senha" required>
+            <input type="password" id="confirmarSenha" placeholder="Confirme sua senha" required>
+            <button type="submit">Criar conta</button>
+        </form>
+
+        <p class="trocar-tela">
+            Já tem uma conta?
+            <a href="#" onclick="mostrarTela('login')">Entrar</a>
+        </p>
+    </section>
+
+    <!-- Página principal -->
+    <section class="tela tela-apoio" id="tela-apoio" hidden>
         <header class="cabecalho-apoio">
             <img src="escudo.png" alt="Logo do sistema">
-
             <div>
-                <h1>Olá, Ana!</h1>
+                <h1 id="nomeUsuario">Olá!</h1>
                 <p>Para onde iremos hoje?</p>
             </div>
         </header>
 
-        <a href="#" class="ajuda-emergencia">
-            <span class="icone-emergencia">♡</span>
-
+        <div class="ajuda-emergencia">
             <div>
                 <h2>Precisa de ajuda agora?</h2>
                 <p>Acolhimento imediato, anônimo e gratuito.</p>
             </div>
-
-            <span class="seta">→</span>
-        </a>
+            <span>→</span>
+        </div>
 
         <h2 class="titulo-opcoes">O que você deseja fazer?</h2>
 
         <div class="opcoes-apoio">
-
             <button class="cartao">
-                <span class="icone rosa">✎</span>
                 <strong>Fazer uma denúncia</strong>
                 <span>Inicie um relato seguro e anônimo.</span>
             </button>
 
             <button class="cartao">
-                <span class="icone azul">♧</span>
                 <strong>Acompanhar denúncias</strong>
-                <span>Veja o andamento e as atualizações de relatos enviados.</span>
+                <span>Veja o andamento dos relatos enviados.</span>
             </button>
 
             <button class="cartao">
-                <span class="icone rosa">♡</span>
                 <strong>Recursos e apoio</strong>
-                <span>Canais de ajuda, apoio psicológico e jurídico.</span>
+                <span>Apoio psicológico e jurídico.</span>
             </button>
 
             <button class="cartao">
-                <span class="icone amarelo">▤</span>
                 <strong>Sobre direitos</strong>
-                <span>Conheça as leis, os direitos das mulheres e cartilhas.</span>
+                <span>Conheça seus direitos e as leis.</span>
             </button>
-
         </div>
 
-        <a href="#" class="aviso-ajuda">
-            <span>Precisa de ajuda agora? Acolhimento imediato e gratuito 24h</span>
-            <span>→</span>
-        </a>
-
+        <button class="botao-voltar" onclick="mostrarTela('inicio')">
+            Sair
+        </button>
     </section>
 
     <script src="script.js"></script>

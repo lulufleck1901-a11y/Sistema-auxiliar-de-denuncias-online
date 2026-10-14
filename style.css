@@ -7,86 +7,128 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
+    color: #303746;
+    background: white;
 }
 
-/* TELA INICIAL */
+.tela[hidden] {
+    display: none;
+}
+
+/* Tela inicial */
 .tela-inicial {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 100px;
-    padding: 40px 20px;
-    background: linear-gradient(to bottom, #ffffff 25%, #ff8fba 100%);
-    text-align: center;
+    gap: 80px;
+    padding: 30px;
+    background: linear-gradient(to bottom, white, #ff8fba);
 }
 
-.imagem img {
-    width: 300px;
+.tela-inicial img {
+    width: 200px;
     max-width: 100%;
-    height: auto;
 }
 
-.conteudo {
-    width: 300px;
+.tela-inicial h1 {
+    font-size: 28px;
 }
 
-.conteudo h1 {
-    font-size: 24px;
-    margin-bottom: 2px;
-    color: #111111;
+.tela-inicial p {
+    margin: 8px 0 30px;
+    line-height: 1.5;
 }
 
-.conteudo p {
-    font-size: 16px;
-    line-height: 1.4;
-    margin-bottom: 40px;
-    color: #222222;
-}
-
-.botoes {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.botoes button {
-    width: 140px;
-    padding: 8px;
-    border: none;
-    border-radius: 7px;
-    background-color: #ff3d8d;
-    color: white;
-    font-size: 14px;
+button {
     cursor: pointer;
+    font-family: inherit;
 }
 
-.botoes a {
-    width: 140px;
-    margin-top: 4px;
-    color: #777777;
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
+.tela-inicial button,
+.formulario button {
+    width: 180px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background: #ff3d8d;
+}
+
+.tela-inicial a {
+    display: inline-block;
+    margin-top: 8px;
+    color: #8e4a63;
     text-decoration: none;
 }
 
-/* TELA PRINCIPAL */
+/* Login e cadastro */
+.formulario {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    text-align: center;
+}
+
+.logo {
+    width: 55px;
+    margin-bottom: 30px;
+}
+
+.formulario h2 {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.formulario > p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.formulario form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.formulario input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.formulario button {
+    margin-top: 8px;
+}
+
+.formulario .trocar-tela {
+    margin-top: 30px;
+    font-size: 12px;
+}
+
+.trocar-tela a {
+    color: #ff3d8d;
+    text-decoration: none;
+}
+
+/* Página principal */
 .tela-apoio {
     min-height: 100vh;
     padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #ffffff;
 }
 
-.tela-apoio[hidden] {
-    display: none;
-}
-
-/* CABEÇALHO */
 .cabecalho-apoio {
     display: flex;
     align-items: center;
@@ -98,69 +140,46 @@ body {
 
 .cabecalho-apoio img {
     width: 45px;
-    height: auto;
 }
 
 .cabecalho-apoio h1 {
-    font-size: 26px;
-    color: #303746;
-    margin-bottom: 4px;
+    font-size: 25px;
+    margin-bottom: 5px;
 }
 
 .cabecalho-apoio p {
+    color: #777;
     font-size: 14px;
-    color: #777777;
 }
 
-/* FAIXA DE EMERGÊNCIA */
 .ajuda-emergencia {
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: space-between;
     width: 100%;
     max-width: 1000px;
-    padding: 18px;
+    padding: 20px;
     border-radius: 12px;
-    background-color: #ed1760;
     color: white;
-    text-decoration: none;
-}
-
-.icone-emergencia {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 35px;
-    height: 35px;
-    border-radius: 10px;
-    background-color: #f84a83;
-    font-size: 22px;
+    background: #ed1760;
 }
 
 .ajuda-emergencia h2 {
     font-size: 16px;
+    margin-bottom: 5px;
 }
 
 .ajuda-emergencia p {
     font-size: 12px;
-    margin-top: 5px;
 }
 
-.ajuda-emergencia .seta {
-    margin-left: auto;
-    font-size: 24px;
-}
-
-/* TÍTULO DAS OPÇÕES */
 .titulo-opcoes {
     width: 100%;
     max-width: 1000px;
     margin: 30px 0 15px;
-    color: #303746;
     font-size: 18px;
 }
 
-/* CARTÕES */
 .opcoes-apoio {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -173,84 +192,41 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
     min-height: 120px;
-    padding: 18px;
-    border: 1px solid #eeeeee;
+    padding: 20px;
+    border: 1px solid #eee;
     border-radius: 12px;
-    background-color: white;
+    background: white;
     color: #303746;
     text-align: left;
-    cursor: pointer;
 }
 
-.cartao strong {
-    font-size: 14px;
-}
-
-.cartao > span:last-child {
-    color: #777777;
-    font-size: 12px;
+.cartao span {
+    color: #777;
+    font-size: 13px;
     line-height: 1.5;
 }
 
-.icone {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    font-size: 20px;
-}
-
-.icone.rosa {
-    background-color: #fde4ed;
-    color: #ed1760;
-}
-
-.icone.azul {
-    background-color: #e1f3ff;
-    color: #168ac4;
-}
-
-.icone.amarelo {
-    background-color: #fff0c7;
-    color: #bd8410;
-}
-
-/* FAIXA INFERIOR */
-.aviso-ajuda {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    max-width: 1000px;
+.botao-voltar {
     margin-top: 25px;
-    padding: 12px;
-    border: 1px solid #ed1760;
+    padding: 10px 25px;
+    border: none;
     border-radius: 8px;
-    color: #ed1760;
-    font-size: 12px;
-    text-decoration: none;
+    background: #f3d6df;
+    color: #8e4a63;
 }
 
-/* CELULAR */
+/* Celular */
 @media (max-width: 700px) {
     .tela-inicial {
         flex-direction: column;
-        gap: 15px;
-        padding: 30px 20px;
+        gap: 25px;
+        text-align: center;
     }
 
-    .imagem img {
-        width: 200px;
-    }
-
-    .conteudo {
-        width: 100%;
-        max-width: 300px;
+    .tela-inicial img {
+        width: 150px;
     }
 
     .tela-apoio {
@@ -259,13 +235,5 @@ body {
 
     .opcoes-apoio {
         grid-template-columns: 1fr;
-    }
-
-    .cabecalho-apoio h1 {
-        font-size: 22px;
-    }
-
-    .ajuda-emergencia {
-        padding: 14px;
     }
 }
