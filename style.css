@@ -1,4 +1,5 @@
 
+/* Configurações gerais */
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +14,23 @@ body {
 
 .tela[hidden] {
     display: none;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid #8e4a63;
+    outline-offset: 3px;
 }
 
 /* Tela inicial */
@@ -40,11 +58,6 @@ body {
     line-height: 1.5;
 }
 
-button {
-    cursor: pointer;
-    font-family: inherit;
-}
-
 .tela-inicial button,
 .formulario button {
     width: 180px;
@@ -53,6 +66,11 @@ button {
     border-radius: 8px;
     color: white;
     background: #ff3d8d;
+}
+
+.tela-inicial button:hover,
+.formulario button:hover {
+    background: #e82d7a;
 }
 
 .tela-inicial a {
@@ -104,6 +122,12 @@ button {
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.formulario input:focus {
+    border-color: #d982a0;
+    outline: none;
 }
 
 .formulario button {
@@ -156,6 +180,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     width: 100%;
     max-width: 1000px;
     padding: 20px;
@@ -200,6 +225,13 @@ button {
     background: white;
     color: #303746;
     text-align: left;
+    box-shadow: 0 3px 10px rgba(48, 55, 70, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cartao:hover {
+    border-color: #f3d6df;
+    box-shadow: 0 5px 15px rgba(142, 74, 99, 0.12);
 }
 
 .cartao span {
@@ -217,25 +249,8 @@ button {
     color: #8e4a63;
 }
 
-/* Celular */
-@media (max-width: 700px) {
-    .tela-inicial {
-        flex-direction: column;
-        gap: 25px;
-        text-align: center;
-    }
-
-    .tela-inicial img {
-        width: 150px;
-    }
-
-    .tela-apoio {
-        padding: 25px 18px;
-    }
-
-    .opcoes-apoio {
-        grid-template-columns: 1fr;
-    }
+.botao-voltar:hover {
+    background: #e8bdcc;
 }
 
 /* Tela de acolhimento */
@@ -283,8 +298,43 @@ button {
     color: #555;
 }
 
+/* Ajustes para celular */
 @media (max-width: 700px) {
+    .tela-inicial {
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .tela-inicial img {
+        width: 150px;
+    }
+
+    .mensagem-inicial {
+        margin-top: -12px;
+    }
+
+    .tela-apoio {
+        padding: 25px 18px;
+    }
+
+    .cabecalho-apoio h1 {
+        font-size: 21px;
+    }
+
+    .opcoes-apoio {
+        grid-template-columns: 1fr;
+    }
+
     .tela-acolhimento {
         padding: 25px 18px;
+    }
+
+    .tela-acolhimento h1 {
+        font-size: 24px;
+    }
+
+    .orientacao {
+        padding: 16px;
     }
 }

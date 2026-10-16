@@ -17,9 +17,11 @@
             <h1>Bem-vindo!</h1>
             <p>Sua segurança importa.<br>Estamos aqui para te apoiar.</p>
 
-            <button onclick="mostrarTela('login')">Começar</button>
+            <button type="button" onclick="mostrarTela('login')">
+                Começar
+            </button>
             <br>
-            <a href="#" onclick="mostrarTela('login')">Saiba mais</a>
+            <a href="#" onclick="mostrarTela('login'); return false;">Saiba mais</a>
         </div>
     </main>
 
@@ -31,14 +33,14 @@
         <p>Faça login para continuar.</p>
 
         <form id="formLogin">
-            <input type="email" id="emailLogin" placeholder="E-mail ou telefone" required>
+            <input type="email" id="emailLogin" placeholder="E-mail" required>
             <input type="password" id="senhaLogin" placeholder="Senha" required>
             <button type="submit">Entrar</button>
         </form>
 
         <p class="trocar-tela">
             Não tem uma conta?
-            <a href="#" onclick="mostrarTela('cadastro')">Criar conta</a>
+            <a href="#" onclick="mostrarTela('cadastro'); return false;">Criar conta</a>
         </p>
     </section>
 
@@ -51,7 +53,7 @@
 
         <form id="formCadastro">
             <input type="text" id="nomeCadastro" placeholder="Nome completo" required>
-            <input type="email" id="emailCadastro" placeholder="E-mail ou telefone" required>
+            <input type="email" id="emailCadastro" placeholder="E-mail" required>
             <input type="password" id="senhaCadastro" placeholder="Senha" required>
             <input type="password" id="confirmarSenha" placeholder="Confirme sua senha" required>
             <button type="submit">Criar conta</button>
@@ -59,7 +61,7 @@
 
         <p class="trocar-tela">
             Já tem uma conta?
-            <a href="#" onclick="mostrarTela('login')">Entrar</a>
+            <a href="#" onclick="mostrarTela('login'); return false;">Entrar</a>
         </p>
     </section>
 
@@ -84,61 +86,72 @@
         <h2 class="titulo-opcoes">O que você deseja fazer?</h2>
 
         <div class="opcoes-apoio">
-            <button class="cartao">
+            <button type="button" class="cartao">
                 <strong>Fazer uma denúncia</strong>
                 <span>Inicie um relato seguro e anônimo.</span>
             </button>
 
-            <button class="cartao">
+            <button type="button" class="cartao">
                 <strong>Acompanhar denúncias</strong>
                 <span>Veja o andamento dos relatos enviados.</span>
             </button>
 
-            <button class="cartao" onclick="mostrarTela('tela-acolhimento')">
+            <button type="button" class="cartao"
+                onclick="mostrarTela('tela-acolhimento')">
                 <strong>Recursos e apoio</strong>
                 <span>Apoio psicológico e jurídico.</span>
             </button>
 
-            <button class="cartao">
+            <button type="button" class="cartao">
                 <strong>Sobre direitos</strong>
                 <span>Conheça seus direitos e as leis.</span>
             </button>
         </div>
 
-        <button class="botao-voltar" onclick="mostrarTela('inicio')">
+        <button type="button" class="botao-voltar"
+            onclick="mostrarTela('inicio')">
             Sair
         </button>
     </section>
 
-<!-- Tela de acolhimento -->
-<section class="tela tela-acolhimento" id="tela-acolhimento" hidden>
-    <h1>Você não está sozinha!</h1>
+    <!-- Tela de acolhimento -->
+    <section class="tela tela-acolhimento" id="tela-acolhimento" hidden>
+        <h1>Você não está sozinha!</h1>
 
-    <p>
-        Sentimos muito que você esteja passando por essa situação.
-        Você merece respeito e apoio.
-    </p>
+        <p>
+            Sentimos muito que você esteja passando por essa situação.
+            Você merece respeito e apoio.
+        </p>
 
-    <div class="orientacao">
-        <h2>Como se proteger?</h2>
-        <p>Guarde mensagens, links e capturas de tela que possam servir como prova, se for seguro fazer isso.</p>
-    </div>
+        <div class="orientacao">
+            <h2>Como se proteger?</h2>
+            <p>
+                Guarde mensagens, links e capturas de tela que possam
+                servir como prova, se for seguro fazer isso.
+            </p>
+        </div>
 
-    <div class="orientacao">
-        <h2>Procure ajuda</h2>
-        <p>Converse com alguém de confiança ou procure um serviço especializado de atendimento.</p>
-    </div>
+        <div class="orientacao">
+            <h2>Procure ajuda</h2>
+            <p>
+                Converse com alguém de confiança ou procure um serviço
+                especializado de atendimento.
+            </p>
+        </div>
 
-    <div class="orientacao">
-        <h2>Você tem direitos</h2>
-        <p>O assédio e as ameaças no ambiente digital devem ser levados a sério. Você merece ser ouvida e acolhida.</p>
-    </div>
+        <div class="orientacao">
+            <h2>Você tem direitos</h2>
+            <p>
+                O assédio e as ameaças no ambiente digital devem ser
+                levados a sério. Você merece ser ouvida e acolhida.
+            </p>
+        </div>
 
-    <button class="botao-voltar" onclick="mostrarTela('tela-apoio')">
-        Voltar
-    </button>
-</section>
-
+        <button type="button" class="botao-voltar"
+            onclick="mostrarTela('tela-apoio')">
+            Voltar
+        </button>
+    </section>
 
     <script src="script.js"></script>
 </body>
