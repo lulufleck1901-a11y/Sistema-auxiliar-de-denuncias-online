@@ -94,7 +94,7 @@
                 <span>Veja o andamento dos relatos enviados.</span>
             </button>
 
-            <button class="cartao">
+            <button class="cartao" onclick="mostrarTela('tela-acolhimento')">
                 <strong>Recursos e apoio</strong>
                 <span>Apoio psicológico e jurídico.</span>
             </button>
@@ -109,6 +109,36 @@
             Sair
         </button>
     </section>
+
+<!-- Tela de acolhimento -->
+<section class="tela tela-acolhimento" id="tela-acolhimento" hidden>
+    <h1>Você não está sozinha!</h1>
+
+    <p>
+        Sentimos muito que você esteja passando por essa situação.
+        Você merece respeito e apoio.
+    </p>
+
+    <div class="orientacao">
+        <h2>Como se proteger?</h2>
+        <p>Guarde mensagens, links e capturas de tela que possam servir como prova, se for seguro fazer isso.</p>
+    </div>
+
+    <div class="orientacao">
+        <h2>Procure ajuda</h2>
+        <p>Converse com alguém de confiança ou procure um serviço especializado de atendimento.</p>
+    </div>
+
+    <div class="orientacao">
+        <h2>Você tem direitos</h2>
+        <p>O assédio e as ameaças no ambiente digital devem ser levados a sério. Você merece ser ouvida e acolhida.</p>
+    </div>
+
+    <button class="botao-voltar" onclick="mostrarTela('tela-apoio')">
+        Voltar
+    </button>
+</section>
+
 
     <script src="script.js"></script>
 </body>
