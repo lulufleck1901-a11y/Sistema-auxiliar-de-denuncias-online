@@ -9,7 +9,7 @@
 body {
     font-family: Arial, sans-serif;
     color: #303746;
-    background: white;
+    background: #fff8fb;
 }
 
 .tela[hidden] {
@@ -17,20 +17,38 @@ body {
 }
 
 button {
-    cursor: pointer;
     font-family: inherit;
-    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-button:hover {
+a {
+    color: #8e4a63;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ff3d8d;
+}
+
+/* Botões principais */
+.botao-principal,
+.formulario form button,
+.tela-extra form button {
+    background: #ff3d8d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 22px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.botao-principal:hover,
+.formulario form button:hover,
+.tela-extra form button:hover {
+    background: #e92f7c;
     transform: translateY(-2px);
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-    outline: 2px solid #8e4a63;
-    outline-offset: 3px;
 }
 
 /* Tela inicial */
@@ -39,45 +57,38 @@ input:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 80px;
-    padding: 30px;
-    background: linear-gradient(to bottom, white, #ff8fba);
+    gap: 70px;
+    padding: 40px;
+    background: linear-gradient(135deg, #fff9fc, #f3d6df);
 }
 
 .tela-inicial img {
-    width: 200px;
-    max-width: 100%;
+    width: 280px;
+    max-width: 40%;
 }
 
 .tela-inicial h1 {
-    font-size: 28px;
+    color: #8e4a63;
+    font-size: 42px;
+    margin-bottom: 15px;
 }
 
 .tela-inicial p {
-    margin: 8px 0 30px;
-    line-height: 1.5;
+    max-width: 420px;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 25px;
 }
 
-.tela-inicial button,
-.formulario button {
-    width: 180px;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    background: #ff3d8d;
+.tela-inicial .botao-principal {
+    min-width: 150px;
+    box-shadow: 0 5px 12px #ff3d8d30;
 }
 
-.tela-inicial button:hover,
-.formulario button:hover {
-    background: #e82d7a;
-}
-
-.tela-inicial a {
+.link-secundario {
     display: inline-block;
-    margin-top: 8px;
-    color: #8e4a63;
-    text-decoration: none;
+    margin-top: 15px;
+    padding: 8px 0;
 }
 
 /* Login e cadastro */
@@ -87,130 +98,157 @@ input:focus-visible {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 25px;
-    text-align: center;
+    padding: 35px 20px;
+    background: linear-gradient(135deg, #fff9fc, #f3d6df);
 }
 
-.logo {
-    width: 55px;
-    margin-bottom: 30px;
+.formulario img {
+    width: 100px;
+    margin-bottom: 15px;
 }
 
 .formulario h2 {
-    font-size: 23px;
-    margin-bottom: 8px;
+    color: #8e4a63;
+    font-size: 28px;
+    margin-bottom: 5px;
 }
 
 .formulario > p {
-    font-size: 14px;
     color: #777;
-    margin-bottom: 25px;
+    margin-bottom: 18px;
+    text-align: center;
 }
 
 .formulario form {
+    width: 100%;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    max-width: 300px;
+    gap: 10px;
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px #8e4a6315;
+}
+
+.formulario label {
+    color: #8e4a63;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .formulario input {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
+    padding: 13px;
+    border: 1px solid #e5cbd5;
     border-radius: 8px;
+    font-family: inherit;
     font-size: 14px;
-    transition: border-color 0.2s;
+    background: #fffafd;
 }
 
 .formulario input:focus {
-    border-color: #d982a0;
-    outline: none;
+    outline: 2px solid #f3d6df;
+    border-color: #ff3d8d;
 }
 
-.formulario button {
-    margin-top: 8px;
+.formulario form button {
+    margin-top: 10px;
 }
 
 .formulario .trocar-tela {
-    margin-top: 30px;
-    font-size: 12px;
+    margin-top: 18px;
+    font-size: 14px;
 }
 
-.trocar-tela a {
+.formulario .trocar-tela a {
+    font-weight: bold;
+}
+
+/* Botão de voltar discreto */
+.botao-voltar {
+    background: transparent;
+    color: #8e4a63;
+    border: none;
+    padding: 10px 0;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botao-voltar:hover {
     color: #ff3d8d;
-    text-decoration: none;
+    transform: translateX(-3px);
 }
 
 /* Página principal */
 .tela-apoio {
     min-height: 100vh;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 35px 7%;
+    background: #fff8fb;
 }
 
 .cabecalho-apoio {
     display: flex;
     align-items: center;
-    gap: 15px;
-    width: 100%;
-    max-width: 1000px;
-    margin-bottom: 30px;
+    gap: 20px;
+    margin-bottom: 35px;
 }
 
 .cabecalho-apoio img {
-    width: 45px;
+    width: 85px;
 }
 
 .cabecalho-apoio h1 {
-    font-size: 25px;
+    color: #8e4a63;
+    font-size: 27px;
     margin-bottom: 5px;
 }
 
 .cabecalho-apoio p {
     color: #777;
-    font-size: 14px;
 }
 
+/* Aviso de acolhimento */
 .ajuda-emergencia {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    width: 100%;
-    max-width: 1000px;
-    padding: 20px;
-    border-radius: 12px;
-    color: white;
-    background: #ed1760;
+    gap: 20px;
+    padding: 28px;
+    margin-bottom: 35px;
+    border-radius: 16px;
+    background: linear-gradient(120deg, #f3d6df, #ffeaf2);
 }
 
 .ajuda-emergencia h2 {
-    font-size: 16px;
-    margin-bottom: 5px;
+    color: #8e4a63;
+    font-size: 22px;
+    margin-bottom: 8px;
 }
 
 .ajuda-emergencia p {
-    font-size: 12px;
+    line-height: 1.6;
 }
 
+.ajuda-emergencia span {
+    font-size: 35px;
+    color: #8e4a63;
+}
+
+/* Cartões da página principal */
 .titulo-opcoes {
-    width: 100%;
-    max-width: 1000px;
-    margin: 30px 0 15px;
-    font-size: 18px;
+    color: #8e4a63;
+    font-size: 22px;
+    margin-bottom: 20px;
 }
 
 .opcoes-apoio {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 15px;
-    width: 100%;
-    max-width: 1000px;
+    gap: 20px;
 }
 
 .cartao {
@@ -218,123 +256,222 @@ input:focus-visible {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    min-height: 120px;
-    padding: 20px;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    background: white;
-    color: #303746;
+    min-height: 125px;
+    padding: 25px;
     text-align: left;
-    box-shadow: 0 3px 10px rgba(48, 55, 70, 0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
+    color: #303746;
+    background: white;
+    border: 1px solid #f0dce4;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px #8e4a630c;
 }
 
 .cartao:hover {
-    border-color: #f3d6df;
-    box-shadow: 0 5px 15px rgba(142, 74, 99, 0.12);
+    border-color: #d982a0;
+    box-shadow: 0 7px 18px #8e4a6318;
+}
+
+.cartao strong {
+    color: #8e4a63;
+    font-size: 17px;
 }
 
 .cartao span {
-    color: #777;
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-.botao-voltar {
-    margin-top: 25px;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 8px;
-    background: #f3d6df;
-    color: #8e4a63;
-}
-
-.botao-voltar:hover {
-    background: #e8bdcc;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
 /* Tela de acolhimento */
 .tela-acolhimento {
     min-height: 100vh;
-    padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 20px;
-    text-align: center;
+    padding: 45px 20px;
+    background: linear-gradient(180deg, #fff8fb, #fceaf1);
 }
 
 .tela-acolhimento h1 {
     color: #8e4a63;
-    font-size: 28px;
+    font-size: 29px;
+    text-align: center;
 }
 
-.tela-acolhimento > p {
-    max-width: 500px;
-    line-height: 1.5;
-    color: #777;
+.texto-acolhimento {
+    max-width: 550px;
+    color: #666;
+    text-align: center;
+    line-height: 1.7;
 }
 
 .orientacao {
     width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    border: 1px solid #f3d6df;
-    border-radius: 12px;
-    text-align: left;
+    max-width: 550px;
+    padding: 23px;
+    border: 1px solid #f0dce4;
+    border-radius: 13px;
     background: white;
+    box-shadow: 0 4px 15px #8e4a630c;
+    line-height: 1.7;
 }
 
 .orientacao h2 {
-    margin-bottom: 8px;
-    font-size: 17px;
     color: #8e4a63;
+    font-size: 18px;
+    margin-bottom: 8px;
 }
 
-.orientacao p {
-    font-size: 14px;
+/* Denúncia, acompanhamento e direitos */
+.tela-extra {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 40px 20px;
+    background: linear-gradient(180deg, #fff8fb, #fceaf1);
+}
+
+.tela-extra h1 {
+    color: #8e4a63;
+    font-size: 28px;
+    text-align: center;
+}
+
+.tela-extra > p {
+    max-width: 550px;
+    color: #777;
+    text-align: center;
     line-height: 1.6;
-    color: #555;
 }
 
-/* Ajustes para celular */
+.tela-extra form {
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    padding: 27px;
+    border: 1px solid #f0dce4;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 20px #8e4a6310;
+}
+
+.tela-extra label {
+    color: #8e4a63;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tela-extra input,
+.tela-extra select,
+.tela-extra textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e5cbd5;
+    border-radius: 8px;
+    background: #fffafd;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.tela-extra input:focus,
+.tela-extra select:focus,
+.tela-extra textarea:focus {
+    outline: 2px solid #f3d6df;
+    border-color: #ff3d8d;
+}
+
+.tela-extra textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.tela-extra form button {
+    margin-top: 5px;
+}
+
+.tela-extra .aviso-formulario {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.tela-extra .orientacao {
+    max-width: 550px;
+}
+
+/* Ajustes para celulares */
 @media (max-width: 700px) {
     .tela-inicial {
         flex-direction: column;
         gap: 25px;
+        padding: 30px 22px;
         text-align: center;
     }
 
     .tela-inicial img {
-        width: 150px;
+        width: 180px;
+        max-width: 70%;
     }
 
-    .mensagem-inicial {
-        margin-top: -12px;
+    .tela-inicial h1 {
+        font-size: 32px;
+    }
+
+    .tela-inicial p {
+        font-size: 15px;
+    }
+
+    .formulario form,
+    .tela-extra form {
+        padding: 22px 18px;
     }
 
     .tela-apoio {
         padding: 25px 18px;
     }
 
+    .cabecalho-apoio {
+        gap: 14px;
+    }
+
+    .cabecalho-apoio img {
+        width: 65px;
+    }
+
     .cabecalho-apoio h1 {
-        font-size: 21px;
+        font-size: 22px;
+    }
+
+    .ajuda-emergencia {
+        padding: 20px;
+    }
+
+    .ajuda-emergencia h2 {
+        font-size: 19px;
     }
 
     .opcoes-apoio {
         grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .cartao {
+        min-height: 100px;
+        padding: 20px;
     }
 
     .tela-acolhimento {
-        padding: 25px 18px;
+        padding: 30px 18px;
     }
 
-    .tela-acolhimento h1 {
+    .tela-acolhimento h1,
+    .tela-extra h1 {
         font-size: 24px;
-    }
-
-    .orientacao {
-        padding: 16px;
     }
 }

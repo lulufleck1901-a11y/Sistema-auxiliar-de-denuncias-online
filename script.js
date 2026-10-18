@@ -7,9 +7,11 @@ function mostrarTela(nomeTela) {
     }
 
     document.getElementById(nomeTela).hidden = false;
+
+    window.scrollTo(0, 0);
 }
 
-// Cadastro
+// Cadastro demonstrativo
 let formCadastro = document.querySelector("#formCadastro");
 
 formCadastro.addEventListener("submit", function(event) {
@@ -34,7 +36,8 @@ formCadastro.addEventListener("submit", function(event) {
         return;
     }
 
-    document.querySelector("#nomeUsuario").textContent = "Olá, " + nome + "!";
+    document.querySelector("#nomeUsuario").textContent =
+        "Olá, " + nome + "!";
 
     alert("Cadastro demonstrativo concluído!");
 
@@ -58,8 +61,21 @@ formLogin.addEventListener("submit", function(event) {
     let nome = prompt("Qual é o seu nome?");
 
     if (nome !== null && nome.trim() !== "") {
-        document.querySelector("#nomeUsuario").textContent = "Olá, " + nome.trim() + "!";
+        document.querySelector("#nomeUsuario").textContent =
+            "Olá, " + nome.trim() + "!";
 
         mostrarTela("tela-apoio");
     }
+});
+
+// Formulário de denúncia demonstrativo
+let formDenuncia = document.querySelector("#formDenuncia");
+
+formDenuncia.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    alert("Este é apenas um teste. O relato não foi salvo nem enviado.");
+
+    formDenuncia.reset();
+    mostrarTela("tela-apoio");
 });
