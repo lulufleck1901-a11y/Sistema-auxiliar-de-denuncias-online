@@ -4,300 +4,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Auxiliar de Denúncias</title>
+    <title>Sistema Auxiliar de Denúncias Online</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
 
-    <!-- Tela inicial -->
-    <main class="tela tela-inicial" id="inicio">
-        <img src="escudo.png" alt="Logo do sistema">
+    <header class="cabecalho">
+        <a href="#" class="marca" onclick="mostrarTela('tela-inicial'); return false;">
+            <img src="escudo.png" alt="Logo do projeto" class="logo">
+        </a>
 
-        <div>
-            <h1>Bem-vindo!</h1>
-            <p>Sua segurança importa.<br>Estamos aqui para te apoiar.</p>
+        <button class="botao-menu" onclick="alternarMenu()" aria-label="Abrir menu">☰</button>
+        <button class="botao-tema" onclick="alternarTema()" aria-label="Alternar tema">◐</button>
+    </header>
 
-            <button type="button" class="botao-principal"
-                onclick="mostrarTela('login')">
-                Começar
-            </button>
+    <nav class="menu-lateral" id="menuLateral">
+        <button onclick="mostrarTela('tela-inicial')">⌂ Início</button>
+        <button onclick="mostrarTela('tela-denuncia')">♧ Denunciar</button>
+        <button onclick="mostrarTela('tela-apoio')">♡ Apoio</button>
+        <button onclick="mostrarTela('tela-recursos')">▤ Recursos</button>
+        <button onclick="mostrarTela('tela-sobre')">♙ Perfil</button>
+    </nav>
 
-            <br>
+    <main class="container">
 
-            <a class="link-secundario" href="#"
-                onclick="mostrarTela('login'); return false;">
-                Saiba mais
-            </a>
-        </div>
-    </main>
-
-    <!-- Tela de login -->
-    <section class="tela formulario" id="login" hidden>
-        <img class="logo" src="escudo.png" alt="Logo do sistema">
-
-        <h2>Bem-vinda!</h2>
-        <p>Faça login para continuar.</p>
-
-        <form id="formLogin">
-            <label for="emailLogin">E-mail</label>
-            <input type="email" id="emailLogin"
-                placeholder="Digite seu e-mail" required>
-
-            <label for="senhaLogin">Senha</label>
-            <input type="password" id="senhaLogin"
-                placeholder="Digite sua senha" required>
-
-            <button type="submit">Entrar</button>
-        </form>
-
-        <p class="trocar-tela">
-            Não tem uma conta?
-            <a href="#" onclick="mostrarTela('cadastro'); return false;">
-                Criar conta
-            </a>
-        </p>
-
-        <button type="button" class="botao-voltar"
-            onclick="mostrarTela('inicio')">
-            Voltar
-        </button>
-    </section>
-
-    <!-- Tela de cadastro -->
-    <section class="tela formulario" id="cadastro" hidden>
-        <img class="logo" src="escudo.png" alt="Logo do sistema">
-
-        <h2>Bem-vinda!</h2>
-        <p>Crie sua conta para continuar.</p>
-
-        <form id="formCadastro">
-            <label for="nomeCadastro">Nome completo</label>
-            <input type="text" id="nomeCadastro"
-                placeholder="Digite seu nome" required>
-
-            <label for="emailCadastro">E-mail</label>
-            <input type="email" id="emailCadastro"
-                placeholder="Digite seu e-mail" required>
-
-            <label for="senhaCadastro">Senha</label>
-            <input type="password" id="senhaCadastro"
-                placeholder="Crie uma senha" required>
-
-            <label for="confirmarSenha">Confirmar senha</label>
-            <input type="password" id="confirmarSenha"
-                placeholder="Digite a senha novamente" required>
-
-            <button type="submit">Criar conta</button>
-        </form>
-
-        <p class="trocar-tela">
-            Já tem uma conta?
-            <a href="#" onclick="mostrarTela('login'); return false;">
-                Entrar
-            </a>
-        </p>
-
-        <button type="button" class="botao-voltar"
-            onclick="mostrarTela('inicio')">
-            Voltar
-        </button>
-    </section>
-
-    <!-- Página principal -->
-    <section class="tela tela-apoio" id="tela-apoio" hidden>
-        <header class="cabecalho-apoio">
-            <img src="escudo.png" alt="Logo do sistema">
-
-            <div>
-                <h1 id="nomeUsuario">Olá!</h1>
+        <!-- INÍCIO -->
+        <section id="tela-inicial" class="tela ativa">
+            <div class="saudacao">
+                <h1>Olá, <span id="nomeInicio">Ana</span>!</h1>
                 <p>Para onde iremos hoje?</p>
             </div>
-        </header>
 
-        <div class="ajuda-emergencia">
-            <div>
-                <h2>Precisa de ajuda agora?</h2>
-                <p>Acolhimento imediato e orientações de apoio.</p>
+            <button class="cartao-urgente" onclick="mostrarTela('tela-direitos')">
+                <span class="icone-urgente">♧</span>
+                <span>
+                    <strong>Precisa de ajuda agora?</strong>
+                    <small>Acolhimento imediato e gratuito 24h</small>
+                </span>
+                <span class="seta">➜</span>
+            </button>
+
+            <div class="secao">
+                <h2>O que você deseja fazer?</h2>
+
+                <div class="grade">
+                    <button class="cartao-opcao" onclick="mostrarTela('tela-denuncia')">
+                        <span class="icone rosa">♧</span>
+                        <strong>Fazer uma denúncia</strong>
+                        <small>Inicie um relato seguro</small>
+                    </button>
+
+                    <button class="cartao-opcao" onclick="mostrarTela('tela-acompanhamento')">
+                        <span class="icone azul">◎</span>
+                        <strong>Acompanhar denúncias</strong>
+                        <small>Veja o andamento</small>
+                    </button>
+
+                    <button class="cartao-opcao" onclick="mostrarTela('tela-recursos')">
+                        <span class="icone verde">♡</span>
+                        <strong>Recursos e apoio</strong>
+                        <small>Canais de ajuda</small>
+                    </button>
+
+                    <button class="cartao-opcao" onclick="mostrarTela('tela-direitos')">
+                        <span class="icone laranja">▤</span>
+                        <strong>Sobre direitos</strong>
+                        <small>Conheça as leis</small>
+                    </button>
+                </div>
             </div>
 
-            <span aria-hidden="true">→</span>
-        </div>
+            <div class="aviso">
+                <strong>Importante:</strong> este é um protótipo educativo.
+                Não envia nem armazena denúncias reais.
+            </div>
+        </section>
 
-        <h2 class="titulo-opcoes">O que você deseja fazer?</h2>
+        <!-- DENÚNCIA: ETAPA 1 -->
+        <section id="tela-denuncia" class="tela">
+            <div class="titulo-tela">
+                <button class="fechar" onclick="mostrarTela('tela-inicial')">×</button>
+                <h2>Fazer denúncia</h2>
+            </div>
 
-        <div class="opcoes-apoio">
-            <button type="button" class="cartao"
-                onclick="mostrarTela('tela-denuncia')">
-                <strong>Fazer uma denúncia</strong>
-                <span>Inicie um relato demonstrativo.</span>
+            <div class="etapas">
+                <div class="etapa ativa"><span>1</span><small>Ocorrido</small></div>
+                <div class="etapa"><span>2</span><small>Detalhes</small></div>
+                <div class="etapa"><span>3</span><small>Anexos</small></div>
+                <div class="etapa"><span>4</span><small>Revisão</small></div>
+                <div class="etapa"><span>5</span><small>Conclusão</small></div>
+            </div>
+
+            <div class="conteudo-denuncia">
+                <div class="passo-denuncia" data-passo="1">
+                    <h1>Sobre o ocorrido</h1>
+                    <p class="texto-suave">Conte-nos o que aconteceu.</p>
+
+                    <h3>Tipo de ocorrência</h3>
+                    <div class="opcoes-ocorrencia">
+                        <button class="opcao-ocorrencia" data-tipo="Assédio" onclick="selecionarTipo(this)">♙ <span>Assédio</span></button>
+                        <button class="opcao-ocorrencia" data-tipo="Ameaça" onclick="selecionarTipo(this)">⚠ <span>Ameaça</span></button>
+                        <button class="opcao-ocorrencia" data-tipo="Violência" onclick="selecionarTipo(this)">♧ <span>Violência</span></button>
+                        <button class="opcao-ocorrencia" data-tipo="Discriminação" onclick="selecionarTipo(this)">♙ <span>Discriminação</span></button>
+                        <button class="opcao-ocorrencia" data-tipo="Stalking Online" onclick="selecionarTipo(this)">◎ <span>Stalking Online</span></button>
+                        <button class="opcao-ocorrencia" data-tipo="Outro" onclick="selecionarTipo(this)">⊕ <span>Outro</span></button>
+                    </div>
+                </div>
+
+                <div class="passo-denuncia" data-passo="2" hidden>
+                    <h1>Detalhes</h1>
+                    <p class="texto-suave">Conte mais sobre o que aconteceu.</p>
+
+                    <label for="relato">Relato do ocorrido</label>
+                    <textarea id="relato" rows="5" maxlength="1000" placeholder="Escreva em detalhes o que aconteceu..."></textarea>
+                    <p class="contador"><span id="contadorRelato">0</span>/1000</p>
+
+                    <label for="plataforma">Onde aconteceu?</label>
+                    <select id="plataforma">
+                        <option value="">Selecione a plataforma</option>
+                        <option>Instagram</option>
+                        <option>TikTok</option>
+                        <option>Facebook</option>
+                        <option>WhatsApp</option>
+                        <option>Outra plataforma</option>
+                        <option>Prefiro não informar</option>
+                    </select>
+
+                    <label for="dataOcorrencia">Quando aconteceu?</label>
+                    <input type="date" id="dataOcorrencia">
+                </div>
+
+                <div class="passo-denuncia" data-passo="3" hidden>
+                    <h1>Anexos</h1>
+                    <p class="texto-suave">Nesta demonstração, você pode selecionar um arquivo localmente.</p>
+
+                    <label for="anexo">Selecionar arquivo (opcional)</label>
+                    <input type="file" id="anexo" accept="image/*,.pdf">
+                    <p class="nota">O arquivo não será enviado nem armazenado pelo site.</p>
+                </div>
+
+                <div class="passo-denuncia" data-passo="4" hidden>
+                    <h1>Revise seu relato</h1>
+                    <p class="texto-suave">Confira as informações antes de concluir a demonstração.</p>
+                    <div id="resumoRelato" class="resumo"></div>
+                    <label class="marcacao">
+                        <input type="checkbox" id="confirmacaoRelato">
+                        Entendi que este formulário é demonstrativo e não envia uma denúncia real.
+                    </label>
+                </div>
+
+                <div class="passo-denuncia" data-passo="5" hidden>
+                    <div class="conclusao">
+                        <span class="icone-conclusao">✓</span>
+                        <h1>Revisão concluída!</h1>
+                        <p>Você concluiu a demonstração do formulário.</p>
+                        <div class="aviso">
+                            Nenhuma denúncia foi enviada ou armazenada.
+                            Para buscar atendimento real, consulte os canais oficiais.
+                        </div>
+                        <button class="botao principal largura" onclick="mostrarTela('tela-direitos')">Ver canais de ajuda</button>
+                        <button class="botao secundario largura" onclick="mostrarTela('tela-inicial')">Voltar ao início</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botoes-etapa">
+                <button class="botao secundario" id="botaoVoltarPasso" onclick="passoAnterior()" hidden>Voltar</button>
+                <button class="botao principal" id="botaoContinuar" onclick="proximoPasso()">Continuar</button>
+            </div>
+        </section>
+
+        <!-- ACOMPANHAMENTO -->
+        <section id="tela-acompanhamento" class="tela">
+            <button class="voltar" onclick="mostrarTela('tela-inicial')">← Voltar</button>
+            <h1>Acompanhar denúncias</h1>
+            <p class="texto-suave">Acompanhe informações sobre o funcionamento do sistema.</p>
+            <div class="cartao-informacao">
+                <span class="icone azul">◎</span>
+                <h3>Recurso em desenvolvimento</h3>
+                <p>Esta versão ainda não possui servidor ou banco de dados para registrar e acompanhar denúncias reais.</p>
+            </div>
+        </section>
+
+        <!-- APOIO E RECURSOS -->
+        <section id="tela-recursos" class="tela">
+            <button class="voltar" onclick="mostrarTela('tela-inicial')">← Voltar</button>
+            <h1>Você não está sozinha.</h1>
+            <p class="texto-suave">Peça ajuda. Estamos aqui por você.</p>
+
+            <button class="cartao-urgente" onclick="mostrarTela('tela-direitos')">
+                <span class="icone-urgente">☎</span>
+                <span><strong>Emergência</strong><small>Em caso de risco imediato, ligue 190.</small></span>
+                <span class="seta">➜</span>
             </button>
 
-            <button type="button" class="cartao"
-                onclick="mostrarTela('tela-acompanhamento')">
-                <strong>Acompanhar denúncias</strong>
-                <span>Consulte um exemplo de andamento.</span>
+            <button class="cartao-lista" onclick="mostrarTela('tela-rede-apoio')">
+                <span class="icone rosa">♡</span>
+                <span><strong>Apoio emocional</strong><small>Encontre apoio sem julgamentos.</small></span>
+                <span class="seta-lista">›</span>
             </button>
 
-            <button type="button" class="cartao"
-                onclick="mostrarTela('tela-acolhimento')">
-                <strong>Recursos e apoio</strong>
-                <span>Orientações e informações de apoio.</span>
+            <button class="cartao-lista" onclick="mostrarTela('tela-direitos')">
+                <span class="icone azul">♙</span>
+                <span><strong>Ajuda jurídica</strong><small>Consulte canais de orientação.</small></span>
+                <span class="seta-lista">›</span>
             </button>
 
-            <button type="button" class="cartao"
-                onclick="mostrarTela('tela-direitos')">
-                <strong>Sobre direitos</strong>
-                <span>Conheça informações sobre seus direitos.</span>
+            <button class="cartao-lista" onclick="mostrarTela('tela-direitos')">
+                <span class="icone verde">♧</span>
+                <span><strong>Canais de denúncia</strong><small>Serviços oficiais e delegacias.</small></span>
+                <span class="seta-lista">›</span>
             </button>
-        </div>
 
-        <button type="button" class="botao-voltar"
-            onclick="mostrarTela('inicio')">
-            Sair
-        </button>
-    </section>
+            <button class="cartao-lista" onclick="mostrarTela('tela-seguranca')">
+                <span class="icone laranja">▤</span>
+                <span><strong>Materiais de apoio</strong><small>Orientações sobre segurança digital.</small></span>
+                <span class="seta-lista">›</span>
+            </button>
+        </section>
 
-    <!-- Tela de acolhimento -->
-    <section class="tela tela-acolhimento"
-        id="tela-acolhimento" hidden>
+        <!-- DIREITOS -->
+        <section id="tela-direitos" class="tela">
+            <button class="voltar" onclick="voltarAnterior()">← Voltar</button>
+            <h1>Conheça seus direitos</h1>
+            <p class="texto-suave">Existem serviços oficiais que podem orientar você.</p>
 
-        <h1>Você não está sozinha!</h1>
+            <article class="cartao-informacao destaque">
+                <h2>Emergência — 190</h2>
+                <p>Em caso de perigo imediato, ligue para a Polícia Militar.</p>
+                <a class="botao principal" href="tel:190">Ligar para 190</a>
+            </article>
 
-        <p class="texto-acolhimento">
-            Sentimos muito que você esteja passando por essa situação.
-            Você merece respeito e apoio.
-        </p>
+            <article class="cartao-informacao">
+                <h2>Ligue 180</h2>
+                <p>Central gratuita de atendimento à mulher, disponível 24 horas por dia.</p>
+                <p><strong>WhatsApp:</strong> (61) 9610-0180</p>
+                <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank" rel="noopener noreferrer">Consultar o site oficial ↗</a>
+            </article>
 
-        <div class="orientacao">
-            <h2>Como se proteger?</h2>
-            <p>
-                Guarde mensagens, links e capturas de tela que possam
-                servir como prova, se for seguro fazer isso.
-            </p>
-        </div>
+            <article class="cartao-informacao">
+                <h2>Outros locais de atendimento</h2>
+                <p>Delegacias, Defensoria Pública, serviços de saúde e assistência social podem orientar sobre as opções disponíveis.</p>
+            </article>
 
-        <div class="orientacao">
-            <h2>Procure ajuda</h2>
-            <p>
-                Converse com alguém de confiança ou procure um serviço
-                especializado de atendimento.
-            </p>
-        </div>
+            <div class="aviso">Este site é educativo e não envia denúncias reais.</div>
+        </section>
 
-        <div class="orientacao">
-            <h2>Você tem direitos</h2>
-            <p>
-                O assédio e as ameaças no ambiente digital devem ser
-                levados a sério. Você merece ser ouvida e acolhida.
-            </p>
-        </div>
+        <!-- SEGURANÇA -->
+        <section id="tela-seguranca" class="tela">
+            <button class="voltar" onclick="voltarAnterior()">← Voltar</button>
+            <h1>Segurança digital</h1>
+            <p class="texto-suave">Cuide da sua privacidade e escolha as medidas seguras para sua situação.</p>
 
-        <button type="button" class="botao-voltar"
-            onclick="mostrarTela('tela-apoio')">
-            Voltar
-        </button>
-    </section>
+            <article class="cartao-informacao">
+                <h3>Proteja suas contas</h3>
+                <p>Use senhas fortes e, quando possível, ative a autenticação em dois fatores.</p>
+            </article>
+            <article class="cartao-informacao">
+                <h3>Revise sua privacidade</h3>
+                <p>Confira quem pode ver suas publicações e enviar mensagens.</p>
+            </article>
+            <article class="cartao-informacao">
+                <h3>Guarde registros, se for seguro</h3>
+                <p>Capturas de tela, links e datas podem ajudar ao procurar atendimento. Evite divulgar esses registros publicamente.</p>
+            </article>
+            <article class="cartao-informacao">
+                <h3>Busque apoio</h3>
+                <p>Você não é culpada pelo assédio que sofre. Considere procurar alguém de confiança ou um serviço especializado.</p>
+            </article>
+        </section>
 
-    <!-- Tela de denúncia -->
-    <section class="tela tela-extra" id="tela-denuncia" hidden>
-        <h1>Fazer uma denúncia</h1>
-        <p>Conte o que aconteceu no seu tempo.</p>
+        <!-- REDE DE APOIO -->
+        <section id="tela-rede-apoio" class="tela">
+            <button class="voltar" onclick="voltarAnterior()">← Voltar</button>
+            <h1>Apoio emocional</h1>
+            <p class="texto-suave">Você merece ser escutada e respeitada.</p>
+            <article class="cartao-informacao">
+                <h3>Escute sem julgar</h3>
+                <p>Permita que a pessoa fale no próprio ritmo, sem culpá-la pelo que aconteceu.</p>
+            </article>
+            <article class="cartao-informacao">
+                <h3>Respeite as decisões</h3>
+                <p>Ofereça opções de ajuda sem pressionar a pessoa.</p>
+            </article>
+            <article class="cartao-informacao">
+                <h3>Cuide da privacidade</h3>
+                <p>Não compartilhe relatos, mensagens ou imagens sem autorização.</p>
+            </article>
+            <button class="botao principal largura" onclick="mostrarTela('tela-direitos')">Encontrar canais de ajuda</button>
+        </section>
 
-        <form id="formDenuncia">
-            <label for="tipoDenuncia">Tipo de ocorrência</label>
-            <select id="tipoDenuncia" required>
-                <option value="">Selecione uma opção</option>
-                <option>Assédio virtual</option>
-                <option>Ameaça</option>
-                <option>Perfil falso</option>
-                <option>Divulgação de conteúdo sem consentimento</option>
-                <option>Outro</option>
-            </select>
+        <!-- PERFIL / SOBRE -->
+        <section id="tela-sobre" class="tela">
+            <button class="voltar" onclick="voltarAnterior()">← Voltar</button>
+            <h1>Sobre o projeto</h1>
+            <div class="cartao-informacao">
+                <img src="escudo.png" alt="Logo do projeto" class="logo-grande">
+                <h2>Sistema Auxiliar de Denúncias Online</h2>
+                <p>Projeto educativo que apresenta informações, orientações e caminhos de apoio para mulheres que enfrentam assédio e violência em plataformas digitais.</p>
+                <p>Esta versão não possui servidor, banco de dados, conta real ou envio de denúncias.</p>
+            </div>
+        </section>
 
-            <label for="plataforma">Plataforma onde aconteceu</label>
-            <select id="plataforma" required>
-                <option value="">Selecione uma plataforma</option>
-                <option>Instagram</option>
-                <option>TikTok</option>
-                <option>Facebook</option>
-                <option>WhatsApp</option>
-                <option>Outra</option>
-            </select>
+    </main>
 
-            <label for="relato">Descrição do ocorrido</label>
-            <textarea id="relato" rows="5"
-                placeholder="Descreva o que aconteceu..."
-                required></textarea>
+    <nav class="menu-inferior">
+        <button class="item-menu ativo" data-tela="tela-inicial" onclick="mostrarTela('tela-inicial')"><span>⌂</span><small>Início</small></button>
+        <button class="item-menu" data-tela="tela-denuncia" onclick="mostrarTela('tela-denuncia')"><span>♧</span><small>Denunciar</small></button>
+        <button class="item-menu" data-tela="tela-recursos" onclick="mostrarTela('tela-recursos')"><span>♡</span><small>Apoio</small></button>
+        <button class="item-menu" data-tela="tela-recursos" onclick="mostrarTela('tela-recursos')"><span>▤</span><small>Recursos</small></button>
+        <button class="item-menu" data-tela="tela-sobre" onclick="mostrarTela('tela-sobre')"><span>♙</span><small>Perfil</small></button>
+    </nav>
 
-            <p class="aviso-formulario">
-                Esta é uma demonstração. O relato não será salvo nem enviado.
-            </p>
+    <footer class="rodape">
+        <p>Sistema Auxiliar de Denúncias Online</p>
+        <p>Informação, acolhimento e respeito.</p>
+    </footer>
 
-            <button type="submit">Enviar relato de demonstração</button>
-        </form>
-
-        <button type="button" class="botao-voltar"
-            onclick="mostrarTela('tela-apoio')">
-            Voltar
-        </button>
-    </section>
-
-    <!-- Tela de acompanhamento -->
-    <section class="tela tela-extra"
-        id="tela-acompanhamento" hidden>
-
-        <h1>Acompanhar denúncias</h1>
-        <p>Aqui você poderá consultar o andamento de seus relatos.</p>
-
-        <div class="orientacao">
-            <h2>Exemplo de denúncia</h2>
-            <p>Protocolo: DEMO-001</p>
-            <p>Status: Exemplo demonstrativo</p>
-            <p>Este registro é fictício e não representa uma denúncia real.</p>
-        </div>
-
-        <button type="button" class="botao-voltar"
-            onclick="mostrarTela('tela-apoio')">
-            Voltar
-        </button>
-    </section>
-
-    <!-- Tela de direitos -->
-    <section class="tela tela-extra" id="tela-direitos" hidden>
-        <h1>Sobre seus direitos</h1>
-        <p>Informação também é uma forma de proteção.</p>
-
-        <div class="orientacao">
-            <h2>Privacidade</h2>
-            <p>
-                Proteja suas informações pessoais e evite compartilhar
-                dados sensíveis publicamente.
-            </p>
-        </div>
-
-        <div class="orientacao">
-            <h2>Guarde as evidências</h2>
-            <p>
-                Quando for seguro, guarde mensagens, links e capturas de
-                tela que possam ajudar a documentar o ocorrido.
-            </p>
-        </div>
-
-        <div class="orientacao">
-            <h2>Onde procurar ajuda?</h2>
-            <p>
-                Você pode procurar a Polícia Civil ou um serviço de
-                atendimento especializado. Em situações de emergência,
-                ligue 190.
-            </p>
-        </div>
-
-        <button type="button" class="botao-voltar"
-            onclick="mostrarTela('tela-apoio')">
-            Voltar
-        </button>
-    </section>
-
-    <script src="script.js"></script>
 </body>
 </html>
