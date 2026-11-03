@@ -13,7 +13,6 @@
 
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
   <noscript><p class="aviso-noscript">Este site precisa de JavaScript. Em caso de risco, ligue 190. Para orientação, ligue 180.</p></noscript>
-  <button type="button" id="btn-saida" class="saida-rapida" title="Sai do site e abre uma página neutra (atalho: tecla Esc 3 vezes)">Saída rápida</button>
 
   <!-- Ícones simples (desenhados uma vez e reutilizados com <use>) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -68,31 +67,95 @@
 
       <!-- ===== TELA: BOAS-VINDAS ===== -->
       <section id="tela-bemvindo" class="tela ativa">
-        <div class="bemvindo">
-          <img class="logo-grande" src="escudo.png" alt="Logotipo do projeto">
-          <div class="bloco-texto">
-            <h1>Bem-vindo!</h1>
-            <p>Sua segurança importa.<br>Estamos aqui para te apoiar.</p>
-            <button id="btn-comecar" class="botao">Começar</button><br>
-            <button class="link" data-tela="tela-sobre">Saiba mais</button>
-            <p class="confianca">Sigilo · Acolhimento · Informação de fontes oficiais</p>
+        <div class="auth">
+          <div class="auth-marca">
+            <img class="logo-grande" src="escudo.png" alt="Logotipo do projeto">
+            <p class="auth-nome">Sistema Auxiliar de Denúncias Online</p>
+            <p>Acolhimento, informação e proteção para mulheres no ambiente digital.</p>
+            <ul class="auth-lista">
+              <li>Sigilo e acolhimento</li>
+              <li>Informação de fontes oficiais</li>
+              <li>Canais de ajuda 24 horas</li>
+            </ul>
+          </div>
+          <div class="auth-painel">
+            <div class="auth-caixa">
+              <h1>Bem-vinda!</h1>
+              <p class="suave">Sua segurança importa. Estamos aqui para te apoiar.</p>
+              <button id="btn-comecar" class="botao botao-cheio">Começar</button>
+              <button class="botao-claro botao-cheio" data-tela="tela-sobre">Saiba mais</button>
+              <p class="aviso-demo">Protótipo de demonstração. Em caso de risco, ligue <a href="tel:190">190</a>. Orientação 24h: <a href="tel:180">180</a>.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- ===== TELA: LOGIN DEMONSTRATIVO ===== -->
+      <!-- ===== TELA: LOGIN E CADASTRO (demonstrativos) ===== -->
       <section id="tela-login" class="tela">
-        <div class="bemvindo">
-          <img class="logo-grande" src="escudo.png" alt="Logotipo do projeto">
-          <form id="form-login" class="bloco-texto">
-            <h1>Entrar</h1>
-            <p class="aviso-demo">Login de demonstração: use apenas um nome fictício.</p>
-            <label for="campo-nome">Como podemos te chamar?</label>
-            <input id="campo-nome" type="text" maxlength="30" placeholder="Ex.: Ana">
-            <label class="marcar"><input id="campo-entendi" type="checkbox"> Entendi que este protótipo não recebe nem envia denúncias reais.</label>
-            <button type="submit" class="botao">Entrar</button>
-            <p id="msg-login" class="mensagem" role="alert"></p>
-          </form>
+        <div class="auth">
+          <div class="auth-marca">
+            <img class="logo-grande" src="escudo.png" alt="Logotipo do projeto">
+            <p class="auth-nome">Sistema Auxiliar de Denúncias Online</p>
+            <p>Um espaço seguro para buscar informação e apoio.</p>
+            <ul class="auth-lista">
+              <li>Nenhum relato é enviado ou guardado</li>
+              <li>Use apenas dados fictícios</li>
+              <li>Você pode apagar tudo quando quiser</li>
+            </ul>
+          </div>
+
+          <div class="auth-painel">
+            <div class="auth-caixa">
+              <h1>Acessar</h1>
+              <p class="suave">Escolha uma opção para continuar.</p>
+
+              <div class="abas" role="tablist" aria-label="Entrar ou criar conta">
+                <button type="button" id="aba-entrar" class="aba ativa" role="tab" aria-selected="true" aria-controls="form-login">Entrar</button>
+                <button type="button" id="aba-cadastro" class="aba" role="tab" aria-selected="false" aria-controls="form-cadastro">Criar conta</button>
+              </div>
+
+              <!-- Entrar -->
+              <form id="form-login" novalidate autocomplete="off">
+                <label for="campo-nome">Nome</label>
+                <input id="campo-nome" type="text" maxlength="30" placeholder="Ex.: Ana">
+
+                <label for="campo-senha">Senha de demonstração</label>
+                <div class="campo-senha">
+                  <input id="campo-senha" type="password" maxlength="30" placeholder="Qualquer senha fictícia">
+                  <button type="button" class="ver-senha" data-alvo="campo-senha" aria-label="Mostrar a senha">Mostrar</button>
+                </div>
+
+                <label class="marcar"><input id="campo-entendi" type="checkbox"> Entendi que este protótipo não recebe nem envia denúncias reais.</label>
+                <button type="submit" class="botao botao-cheio">Entrar</button>
+                <p id="msg-login" class="mensagem" role="alert"></p>
+              </form>
+
+              <!-- Criar conta -->
+              <form id="form-cadastro" novalidate autocomplete="off" hidden>
+                <label for="cad-nome">Nome</label>
+                <input id="cad-nome" type="text" maxlength="30" placeholder="Ex.: Ana">
+
+                <label for="cad-email">E-mail fictício</label>
+                <input id="cad-email" type="email" maxlength="60" placeholder="exemplo@exemplo.com">
+
+                <label for="cad-senha">Senha de demonstração</label>
+                <div class="campo-senha">
+                  <input id="cad-senha" type="password" maxlength="30" placeholder="Mínimo de 6 caracteres">
+                  <button type="button" class="ver-senha" data-alvo="cad-senha" aria-label="Mostrar a senha">Mostrar</button>
+                </div>
+
+                <label for="cad-senha2">Confirmar senha</label>
+                <input id="cad-senha2" type="password" maxlength="30" placeholder="Repita a senha">
+
+                <label class="marcar"><input id="cad-entendi" type="checkbox"> Entendi que este protótipo não recebe nem envia denúncias reais e que não devo usar dados verdadeiros.</label>
+                <button type="submit" class="botao botao-cheio">Criar conta</button>
+                <p id="msg-cadastro" class="mensagem" role="alert"></p>
+              </form>
+
+              <p class="aviso-demo">Somente o nome fictício fica guardado neste navegador. E-mail e senhas não são guardados.</p>
+              <button type="button" class="link" data-tela="tela-bemvindo">&larr; Voltar</button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -589,7 +652,7 @@
           <div class="painel">
             <h3>Privacidade e dados</h3>
             <p>Este protótipo guarda apenas, neste navegador: o nome fictício, o modo claro ou escuro, o protocolo fictício e o checklist de segurança. Relatos e anexos nunca são guardados.</p>
-            <p class="suave">Dica: se usar um aparelho compartilhado, apague os dados antes de sair. Se precisar esconder o site rapidamente, use o botão “Saída rápida”.</p>
+            <p class="suave">Dica: se usar um aparelho compartilhado, apague os dados antes de sair.</p>
             <button id="btn-apagar-tudo" class="botao-claro">Apagar todos os dados</button>
           </div>
         </div>

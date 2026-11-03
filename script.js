@@ -22,6 +22,11 @@ const formLogin = document.getElementById("form-login");
 const campoNome = document.getElementById("campo-nome");
 const campoEntendi = document.getElementById("campo-entendi");
 const msgLogin = document.getElementById("msg-login");
+const campoSenha = document.getElementById("campo-senha");
+const formCadastro = document.getElementById("form-cadastro");
+const msgCadastro = document.getElementById("msg-cadastro");
+const abaEntrar = document.getElementById("aba-entrar");
+const abaCadastro = document.getElementById("aba-cadastro");
 const formDenuncia = document.getElementById("form-denuncia");
 const msgDenuncia = document.getElementById("msg-denuncia");
 const btnVoltar = document.getElementById("btn-voltar");
@@ -58,7 +63,7 @@ function mostrarTela(idDaTela, moverFoco) {
   });
   telaNova.classList.add("ativa");
 
-  // Esconde o menu nas telas de boas-vindas e login
+  // Esconde cabeçalho, menu e rodapé nas telas de boas-vindas e login
   const semMenu = idDaTela === "tela-bemvindo" || idDaTela === "tela-login";
   document.body.classList.toggle("sem-menu", semMenu);
 
@@ -117,11 +122,43 @@ document.getElementById("btn-comecar").addEventListener("click", function () {
   irPara(ler("nomeDemo") ? "tela-inicio" : "tela-login");
 });
 
+// Abas "Entrar" e "Criar conta": mostra um formulário e esconde o outro
+function mostrarAba(cadastro) {
+  formLogin.hidden = cadastro;
+  formCadastro.hidden = !cadastro;
+  abaEntrar.classList.toggle("ativa", !cadastro);
+  abaCadastro.classList.toggle("ativa", cadastro);
+  abaEntrar.setAttribute("aria-selected", cadastro ? "false" : "true");
+  abaCadastro.setAttribute("aria-selected", cadastro ? "true" : "false");
+  msgLogin.textContent = "";
+  msgCadastro.textContent = "";
+}
+abaEntrar.addEventListener("click", function () { mostrarAba(false); });
+abaCadastro.addEventListener("click", function () { mostrarAba(true); });
+
+// Botão "Mostrar/Ocultar" da senha
+document.querySelectorAll(".ver-senha").forEach(function (botao) {
+  botao.addEventListener("click", function () {
+    const campo = document.getElementById(botao.dataset.alvo);
+    const mostrar = campo.type === "password";
+    campo.type = mostrar ? "text" : "password";
+    botao.textContent = mostrar ? "Ocultar" : "Mostrar";
+    botao.setAttribute("aria-label", mostrar ? "Ocultar a senha" : "Mostrar a senha");
+  });
+});
+
+// Entrar (a senha NÃO é guardada nem conferida: é só demonstração)
 formLogin.addEventListener("submit", function (evento) {
   evento.preventDefault(); // não recarrega a página
   const nome = campoNome.value.trim();
   if (nome === "") {
     msgLogin.textContent = "Digite um nome fictício para entrar.";
+    campoNome.focus();
+    return;
+  }
+  if (campoSenha.value === "") {
+    msgLogin.textContent = "Digite uma senha de demonstração.";
+    campoSenha.focus();
     return;
   }
   if (!campoEntendi.checked) {
@@ -129,7 +166,47 @@ formLogin.addEventListener("submit", function (evento) {
     return;
   }
   salvar("nomeDemo", nome);
+  formLogin.reset(); // limpa a senha do campo
   msgLogin.textContent = "";
+  mostrarNome();
+  irPara("tela-inicio");
+});
+
+// Criar conta (só o nome fictício é guardado; e-mail e senha não)
+formCadastro.addEventListener("submit", function (evento) {
+  evento.preventDefault();
+  const nome = document.getElementById("cad-nome").value.trim();
+  const email = document.getElementById("cad-email").value.trim();
+  const senha = document.getElementById("cad-senha").value;
+  const senha2 = document.getElementById("cad-senha2").value;
+
+  if (nome.length < 2) {
+    msgCadastro.textContent = "Digite um nome fictício com pelo menos 2 letras.";
+    document.getElementById("cad-nome").focus();
+    return;
+  }
+  if (!email.includes("@") || !email.includes(".")) {
+    msgCadastro.textContent = "Digite um e-mail fictício válido, como exemplo@exemplo.com.";
+    document.getElementById("cad-email").focus();
+    return;
+  }
+  if (senha.length < 6) {
+    msgCadastro.textContent = "A senha precisa ter pelo menos 6 caracteres.";
+    document.getElementById("cad-senha").focus();
+    return;
+  }
+  if (senha !== senha2) {
+    msgCadastro.textContent = "As senhas não são iguais.";
+    document.getElementById("cad-senha2").focus();
+    return;
+  }
+  if (!document.getElementById("cad-entendi").checked) {
+    msgCadastro.textContent = "Marque a caixa para confirmar que entendeu o aviso.";
+    return;
+  }
+  salvar("nomeDemo", nome);
+  formCadastro.reset();
+  msgCadastro.textContent = "";
   mostrarNome();
   irPara("tela-inicio");
 });
@@ -150,8 +227,9 @@ document.getElementById("btn-salvar-nome").addEventListener("click", function ()
 
 document.getElementById("btn-sair").addEventListener("click", function () {
   apagar("nomeDemo");
-  campoNome.value = "";
-  campoEntendi.checked = false;
+  formLogin.reset();
+  formCadastro.reset();
+  mostrarAba(false);
   mostrarNome();
   irPara("tela-bemvindo");
 });
@@ -398,24 +476,10 @@ btnMenu.addEventListener("click", function () {
 });
 btnFecharMenu.addEventListener("click", function () { abrirMenu(false); });
 fundoMenu.addEventListener("click", function () { abrirMenu(false); });
-// Esc fecha o menu. Esc 3 vezes seguidas aciona a saída rápida.
-let pressionadas = [];
+// A tecla Esc fecha o menu
 document.addEventListener("keydown", function (evento) {
-  if (evento.key !== "Escape") { return; }
-  abrirMenu(false);
-  const agora = Date.now();
-  pressionadas = pressionadas.filter(function (t) { return agora - t < 1500; });
-  pressionadas.push(agora);
-  if (pressionadas.length >= 3) { saidaRapida(); }
+  if (evento.key === "Escape") { abrirMenu(false); }
 });
-
-// ===== SAÍDA RÁPIDA =====
-// Abre uma página neutra e tira o site da aba atual (útil se alguém se aproximar).
-function saidaRapida() {
-  window.open("https://www.google.com.br", "_blank");
-  window.location.replace("https://www.google.com.br");
-}
-document.getElementById("btn-saida").addEventListener("click", saidaRapida);
 
 // ===== 10. RESUMO E PERFIL (dados de demonstração) =====
 // Textos reaproveitados no resumo da tela inicial e no perfil
@@ -452,8 +516,9 @@ function atualizarPerfil() {
 document.getElementById("btn-apagar-tudo").addEventListener("click", function () {
   if (!confirm("Apagar todos os dados guardados neste navegador?")) { return; }
   ["nomeDemo", "tema", "protocoloDemo", "dataProtocoloDemo", "statusDemo", "checklistDemo"].forEach(apagar);
-  campoNome.value = "";
-  campoEntendi.checked = false;
+  formLogin.reset();
+  formCadastro.reset();
+  mostrarAba(false);
   aplicarTema(false);
   apagar("tema");
   mostrarNome();
