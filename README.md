@@ -1,50 +1,50 @@
 # Sistema Auxiliar de Denúncias Online
 
-Projeto escolar do Curso Técnico em Informática Integrado ao Ensino Médio.
+Projeto escolar desenvolvido para o Curso Técnico em Informática Integrado ao Ensino Médio.
 
-> **Aviso:** este é um protótipo de demonstração. Ele **não recebe nem envia denúncias reais** e **não guarda relatos, anexos ou dados pessoais**. Em caso de risco, ligue **180** (Central de Atendimento à Mulher) ou **190** (Polícia Militar).
+> **Aviso:** este é um protótipo de demonstração. Ele **não recebe nem envia denúncias reais** e **não armazena relatos, anexos ou dados pessoais**. Em caso de risco, ligue **180** (Central de Atendimento à Mulher) ou **190** (Polícia Militar).
 
 ## Links
 
-- **Site publicado:** _colocar aqui o link depois da publicação_
-- **Repositório no GitHub:** _colocar aqui o link do repositório público_
+- **Site publicado:** https://lulufleck1901-a11y.github.io/Sistema-auxiliar-de-denuncias-online/
+- **Repositório no GitHub:** https://github.com/lulufleck1901-a11y/Sistema-auxiliar-de-denuncias-online
 
 ## Descrição
 
-Ambiente digital informativo, acolhedor e acessível para mulheres que enfrentam situações de assédio, ameaças e violência nas plataformas digitais. O layout segue o protótipo feito no Figma.
+O Sistema Auxiliar de Denúncias Online é um ambiente digital informativo, acolhedor e acessível, desenvolvido para mulheres que enfrentam situações de assédio, ameaças e violência nas plataformas digitais. O layout foi desenvolvido com base no protótipo elaborado no Figma.
 
 ## Objetivo
 
-Oferecer, em uma interface simples e intuitiva, informações de apoio, direitos e canais oficiais, além de demonstrar como seria o fluxo de um relato em etapas.
+Oferecer, por meio de uma interface simples e intuitiva, informações sobre apoio, direitos e canais oficiais de atendimento, além de demonstrar como funcionaria o fluxo de registro e acompanhamento de um relato.
 
 ## Tecnologias utilizadas
 
-- HTML (estrutura das telas)
-- CSS (visual, responsividade e modo escuro)
-- JavaScript (navegação, formulários e localStorage)
+- **HTML:** estrutura das telas e dos conteúdos.
+- **CSS:** estilização, responsividade e modo escuro.
+- **JavaScript:** navegação entre telas, interações, validações de formulários e armazenamento de dados demonstrativos no localStorage.
 
-Sem frameworks, bibliotecas ou backend.
+O projeto foi desenvolvido sem frameworks, bibliotecas ou backend.
 
 ## Funcionalidades
 
-- Telas de boas-vindas, login e cadastro demonstrativos, sem menu, com abas "Entrar" e "Criar conta" (o nome digitado aparece na saudação; e-mail e senha não são guardados)
-- Tela inicial com acesso rápido às funcionalidades
-- Formulário de denúncia em 5 etapas: Ocorrido, Detalhes, Anexos, Revisão e Conclusão
-- Acompanhamento de denúncias com linha do tempo simulada (apenas protocolo fictício)
-- Apoio, rede de apoio, direitos, canais oficiais e segurança digital (com checklist que fica salvo)
-- Perfil com avatar, troca do nome de demonstração, progresso, modo claro/escuro, privacidade e botão para apagar os dados guardados
-- Cabeçalho com botão para abrir e fechar o menu e atalho para o Ligue 180
-- Menu inferior no celular e menu lateral no computador
-- O endereço guarda a tela atual (ex.: `#denuncia`): o botão "voltar" do navegador e o F5 funcionam
-- Acessibilidade: link "pular para o conteúdo", foco automático nas etapas, navegação por teclado e respeito ao modo escuro do aparelho
-- Validações com mensagem clara (data não pode ser futura, campos obrigatórios) e confirmação antes de apagar os dados
+- Telas de boas-vindas, login e cadastro demonstrativos, sem menu, com as abas "Entrar" e "Criar conta". O nome digitado aparece na saudação, enquanto e-mail e senha não são armazenados.
+- Tela inicial com acesso rápido às funcionalidades.
+- Formulário demonstrativo de denúncia dividido em cinco etapas: Ocorrido, Detalhes, Anexos, Revisão e Conclusão.
+- Acompanhamento de denúncias com linha do tempo simulada e protocolo fictício.
+- Área de apoio, rede de apoio, direitos, canais oficiais e segurança digital, com checklist de dicas que permanece salvo.
+- Perfil com avatar, alteração do nome de demonstração, progresso, modo claro e escuro, informações de privacidade e opção para apagar os dados armazenados.
+- Cabeçalho com botão para abrir e fechar o menu e atalho para o Ligue 180.
+- Menu inferior em dispositivos móveis e menu lateral em computadores.
+- Navegação que mantém a tela atual no endereço do navegador (por exemplo, `#denuncia`), permitindo utilizar os botões de voltar e avançar e atualizar a página com F5.
+- Recursos de acessibilidade, como link para pular diretamente ao conteúdo, foco automático nas etapas, navegação por teclado e respeito à preferência de modo escuro do dispositivo.
+- Validações com mensagens claras, incluindo campos obrigatórios, impedimento de datas futuras e confirmação antes de apagar os dados.
 
 ## Estrutura de arquivos
 
-```
+```text
 index.html   -> estrutura das telas
-style.css    -> estilos
-script.js    -> comportamento
+style.css    -> estilos e responsividade
+script.js    -> funcionalidades e interações
 escudo.png   -> logotipo do projeto
 README.md    -> documentação
 ```
@@ -52,57 +52,32 @@ README.md    -> documentação
 ## Como executar
 
 1. Baixe ou clone o repositório.
-2. Deixe `index.html`, `style.css`, `script.js` e `escudo.png` **na mesma pasta**.
-3. Abra o `index.html` no navegador (ou use a extensão Live Server do VS Code).
+2. Mantenha os arquivos `index.html`, `style.css`, `script.js` e `escudo.png` na mesma pasta.
+3. Abra o arquivo `index.html` no navegador ou utilize a extensão Live Server do Visual Studio Code.
 
-## Como publicar (GitHub Pages)
+## Como publicar no GitHub Pages
 
-1. Crie um repositório **público** no GitHub e envie os arquivos.
-2. Vá em **Settings > Pages**.
-3. Em **Source**, escolha a branch `main` e a pasta `/ (root)`, e salve.
-4. Aguarde alguns minutos e copie o link gerado para este README.
+1. Crie um repositório público no GitHub e envie os arquivos do projeto.
+2. Acesse **Settings > Pages**.
+3. Em **Build and deployment**, escolha a opção de publicação pela branch `main` e pela pasta `/ (root)`.
+4. Salve as configurações e aguarde a publicação.
+5. Copie o endereço gerado e disponibilize o link da aplicação.
 
-## Dados guardados no navegador (localStorage)
+## Dados armazenados no navegador (localStorage)
 
-Somente dados de demonstração:
+O sistema utiliza o `localStorage` apenas para armazenar informações demonstrativas, permitindo que algumas preferências e dados simulados permaneçam salvos mesmo após atualizar a página.
 
-| Chave | O que guarda |
+| Chave | Informação armazenada |
 |---|---|
-| `nomeDemo` | Nome fictício digitado no login |
-| `tema` | Preferência de modo claro ou escuro |
-| `protocoloDemo`, `dataProtocoloDemo` e `statusDemo` | Protocolo fictício, data e status simulado |
-| `checklistDemo` | Dicas de segurança digital marcadas no checklist |
+| `nomeDemo` | Nome fictício digitado no login. |
+| `tema` | Preferência de modo claro ou escuro. |
+| `protocoloDemo` | Protocolo fictício de demonstração. |
+| `dataProtocoloDemo` | Data associada ao protocolo fictício. |
+| `statusDemo` | Status simulado do acompanhamento. |
+| `checklistDemo` | Dicas de segurança digital marcadas no checklist. |
 
-O texto do relato e os anexos **nunca** são guardados.
+**Importante:** o texto dos relatos e os anexos não são armazenados. O sistema não realiza o envio de denúncias reais.
 
 ## Checklist dos requisitos da atividade
 
-| Critério | Requisito | Situação |
-|---|---|---|
-| 1 | Site publicado (GitHub Pages, Vercel ou Netlify) e repositório público no GitHub | Pendente |
-| 2 | JavaScript manipulando o DOM e `preventDefault()` nos formulários, com resposta visível | Feito |
-| 3 | `localStorage` com dados fictícios, funcionando após F5 | Feito |
-| 4 | Console do navegador sem erros em vermelho | Conferir com F12 |
-| 5 | Responsividade em computador, tablet e celular, sem rolagem horizontal | Conferir no DevTools |
-| - | README com checklist | Feito |
-| - | Testes com pelo menos 5 usuários reais | Pendente |
-| - | Matriz de Feedback e uma melhoria feita a partir dela | Pendente |
-| - | Trabalho escrito com citações indiretas (Autor, ano) | Pendente |
-| - | 5 slides com QR Code dos links no último | Pendente |
-
-## Fontes das informações
-
-As telas informativas foram conferidas em novembro de 2026 em fontes oficiais:
-
-- gov.br: serviço "Denunciar e buscar ajuda a vítimas de violência contra mulheres" (Ligue 180)
-- Câmara dos Deputados: texto da Lei 14.550/2023 (medidas protetivas de urgência)
-- TJDFT: Direito Fácil, "Stalking" (Lei 14.132/2021)
-- Secom (gov.br): cartilha "Caiu na rede é crime"
-- CNJ: "Conheça a rede de proteção à mulher vítima de violência"
-- CVV (cvv.org.br) e SaferNet Brasil (denunciar.org.br e canaldeajuda.org.br)
-
-As leis e os telefones podem mudar. Confira sempre a versão atual nos sites oficiais.
-
-## Autoria
-
-Projeto desenvolvido por estudante do Curso Técnico em Informática Integrado ao Ensino Médio.
+A tabela apresenta os critérios de avaliação da aplicação e como cada um foi atendido
