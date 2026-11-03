@@ -35,6 +35,10 @@ Sem frameworks, bibliotecas ou backend.
 - Perfil com avatar, troca do nome de demonstração, progresso, modo claro/escuro, privacidade e botão para apagar os dados guardados
 - Cabeçalho com botão para abrir e fechar o menu e atalho para o Ligue 180
 - Menu inferior no celular e menu lateral no computador
+- **Saída rápida**: botão sempre visível (ou tecla Esc 3 vezes) que abre uma página neutra e tira o site da aba
+- O endereço guarda a tela atual (ex.: `#denuncia`): o botão "voltar" do navegador e o F5 funcionam
+- Acessibilidade: link "pular para o conteúdo", foco automático nas etapas, navegação por teclado e respeito ao modo escuro do aparelho
+- Validações com mensagem clara (data não pode ser futura, campos obrigatórios) e confirmação antes de apagar os dados
 
 ## Estrutura de arquivos
 

@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Acolhimento e Denúncia Online</title>
+  <title>Sistema Auxiliar de Denúncias Online</title>
+  <meta name="description" content="Protótipo escolar com informações de apoio, direitos e canais oficiais para mulheres vítimas de violência digital. Não recebe denúncias reais.">
+  <meta name="theme-color" content="#d6195a">
+  <link rel="icon" href="escudo.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="sem-menu">
+
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <noscript><p class="aviso-noscript">Este site precisa de JavaScript. Em caso de risco, ligue 190. Para orientação, ligue 180.</p></noscript>
+  <button type="button" id="btn-saida" class="saida-rapida" title="Sai do site e abre uma página neutra (atalho: tecla Esc 3 vezes)">Saída rápida</button>
 
   <!-- Ícones simples (desenhados uma vez e reutilizados com <use>) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -57,7 +64,7 @@
     </aside>
     <div id="fundo-menu" class="fundo-menu"></div>
 
-    <main>
+    <main id="conteudo" tabindex="-1">
 
       <!-- ===== TELA: BOAS-VINDAS ===== -->
       <section id="tela-bemvindo" class="tela ativa">
@@ -98,7 +105,7 @@
 
             <button class="destaque" data-tela="tela-apoio">
               <span class="icone-branco"><svg class="ic"><use href="#i-shield"/></svg></span>
-              <span><strong>Precisa de ajuda agora?</strong><br><small>Acolhimento imediato, anônimo e gratuito.</small></span>
+              <span><strong>Precisa de ajuda agora?</strong><br><small>Veja como pedir ajuda. O Ligue 180 é gratuito e funciona 24h.</small></span>
               <span class="pill">Pedir ajuda</span>
             </button>
 
@@ -106,12 +113,12 @@
             <div class="grade">
               <button class="cartao c-rosa" data-tela="tela-denuncia">
                 <span class="icone"><svg class="ic"><use href="#i-doc"/></svg></span>
-                <strong>Fazer uma denúncia</strong><small>Inicie um relato seguro e anônimo</small>
+                <strong>Fazer uma denúncia</strong><small>Veja como funciona um relato em etapas (demonstração)</small>
                 <span class="acao">Começar</span>
               </button>
               <button class="cartao c-vermelho" data-tela="tela-acompanhar">
                 <span class="icone"><svg class="ic"><use href="#i-search"/></svg></span>
-                <strong>Acompanhar denúncias</strong><small>Veja o andamento e atualizações de relatos enviados</small>
+                <strong>Acompanhar denúncias</strong><small>Simule o acompanhamento de um relato (dados fictícios)</small>
                 <span class="acao">Acompanhar</span>
               </button>
               <button class="cartao c-vinho" data-tela="tela-apoio">
@@ -176,13 +183,13 @@
             </ol>
             <p class="aviso-demo">Protótipo de demonstração: nenhum relato é enviado ou guardado. Use apenas texto fictício.</p>
 
-            <form id="form-denuncia">
+            <form id="form-denuncia" autocomplete="off">
               <!-- Etapa 1 -->
               <div class="etapa ativa" data-etapa="1">
                 <h2>Sobre o ocorrido</h2>
                 <p class="suave">Conte-nos o que aconteceu. Escolha a opção que melhor define a situação.</p>
-                <label>Tipo de ocorrência</label>
-                <div class="tipos">
+                <label id="rotulo-tipo">Tipo de ocorrência</label>
+                <div class="tipos" role="radiogroup" aria-labelledby="rotulo-tipo">
                   <label><input type="radio" name="tipo" value="Assédio"><span><svg class="ic"><use href="#i-hand"/></svg>Assédio</span></label>
                   <label><input type="radio" name="tipo" value="Ameaça"><span><svg class="ic"><use href="#i-alert"/></svg>Ameaça</span></label>
                   <label><input type="radio" name="tipo" value="Violência"><span><svg class="ic"><use href="#i-heart"/></svg>Violência</span></label>
@@ -195,7 +202,7 @@
               <!-- Etapa 2 -->
               <div class="etapa" data-etapa="2">
                 <h2>Detalhes</h2>
-                <p class="suave">Conte mais sobre o que aconteceu. Seu relato é mantido sob sigilo.</p>
+                <p class="suave">Conte mais sobre o que aconteceu. Nesta demonstração, o texto não é enviado nem guardado.</p>
                 <label for="relato">Relato do ocorrido</label>
                 <textarea id="relato" maxlength="1000" placeholder="Escreva em detalhes o que aconteceu..."></textarea>
                 <p id="contador" class="contador">0/1000</p>
@@ -216,8 +223,8 @@
               <div class="etapa" data-etapa="3">
                 <h2>Anexos</h2>
                 <p class="suave">Prints e links ajudam como prova. Nesta demonstração, nenhum arquivo é enviado.</p>
+                <input id="anexos" class="so-leitor" type="file" multiple>
                 <label for="anexos" class="area-anexo">Clique para escolher arquivos (opcional)</label>
-                <input id="anexos" type="file" multiple hidden>
                 <ul id="lista-anexos"></ul>
               </div>
 
@@ -234,6 +241,7 @@
                 <h2>Concluído (demonstração)</h2>
                 <p>Seu protocolo fictício é:</p>
                 <p class="protocolo" id="protocolo">DEMO-0000</p>
+                <button type="button" id="btn-copiar" class="link">Copiar protocolo</button>
                 <p class="suave">Nada foi enviado. Para fazer uma denúncia de verdade, ligue 180 ou procure uma delegacia.</p>
                 <button type="button" id="btn-nova" class="botao">Nova denúncia</button>
                 <button type="button" class="botao-claro" data-tela="tela-acompanhar">Acompanhar</button>
@@ -270,7 +278,7 @@
       <!-- ===== TELA: ACOMPANHAR ===== -->
       <section id="tela-acompanhar" class="tela pagina">
         <h1>Acompanhar denúncias</h1>
-        <p class="suave">Veja o andamento dos relatos enviados.</p>
+        <p class="suave">Veja como seria o andamento de um relato (demonstração).</p>
         <p class="aviso-demo">Dados fictícios de demonstração, guardados só neste navegador.</p>
         <div class="layout-2">
           <div>
@@ -295,7 +303,7 @@
       <!-- ===== TELA: APOIO ===== -->
       <section id="tela-apoio" class="tela pagina">
         <h1 class="centro">Você não está sozinha.</h1>
-        <p class="suave centro">Peça ajuda. Estamos aqui por você em cada etapa.</p>
+        <p class="suave centro">Peça ajuda. Os canais oficiais abaixo atendem você.</p>
 
         <a class="emergencia" href="tel:190">
           <span class="icone-branco"><svg class="ic"><use href="#i-phone"/></svg></span>
@@ -581,6 +589,7 @@
           <div class="painel">
             <h3>Privacidade e dados</h3>
             <p>Este protótipo guarda apenas, neste navegador: o nome fictício, o modo claro ou escuro, o protocolo fictício e o checklist de segurança. Relatos e anexos nunca são guardados.</p>
+            <p class="suave">Dica: se usar um aparelho compartilhado, apague os dados antes de sair. Se precisar esconder o site rapidamente, use o botão “Saída rápida”.</p>
             <button id="btn-apagar-tudo" class="botao-claro">Apagar todos os dados</button>
           </div>
         </div>
@@ -633,7 +642,8 @@
 
   <!-- ===== RODAPÉ ===== -->
   <footer class="rodape">
-    Protótipo de demonstração, sem envio de denúncias reais · Informações de fontes oficiais · Risco imediato: 190 · Orientação 24h: 180
+    <p>Protótipo de demonstração, sem envio de denúncias reais · Risco imediato: <a href="tel:190">190</a> · Orientação 24h: <a href="tel:180">180</a></p>
+    <p>Informações conferidas em fontes oficiais em novembro de 2026 · <button type="button" class="link" data-tela="tela-sobre">Sobre o projeto</button> · <button type="button" class="link" data-tela="tela-direitos">Leis e fontes</button></p>
   </footer>
 
   <script src="script.js"></script>

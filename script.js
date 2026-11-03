@@ -45,21 +45,30 @@ const menuDaTela = {
   "tela-sobre": "tela-perfil"
 };
 
+const NOME_DO_SITE = "Sistema Auxiliar de Denúncias Online";
+// Telas com dados pessoais usam um título fixo na aba do navegador
+const titulos = { "tela-inicio": "Início", "tela-perfil": "Perfil" };
+
 // Mostra só a tela escolhida e esconde as outras.
-function mostrarTela(idDaTela) {
+function mostrarTela(idDaTela, moverFoco) {
+  const telaNova = document.getElementById(idDaTela);
+  if (!telaNova) { return; }
   document.querySelectorAll(".tela").forEach(function (tela) {
     tela.classList.remove("ativa");
   });
-  document.getElementById(idDaTela).classList.add("ativa");
+  telaNova.classList.add("ativa");
 
   // Esconde o menu nas telas de boas-vindas e login
   const semMenu = idDaTela === "tela-bemvindo" || idDaTela === "tela-login";
   document.body.classList.toggle("sem-menu", semMenu);
 
-  // Destaca o botão atual do menu
+  // Destaca o botão atual do menu (e avisa os leitores de tela)
   const itemDoMenu = menuDaTela[idDaTela] || idDaTela;
   document.querySelectorAll("#menu button").forEach(function (botao) {
-    botao.classList.toggle("atual", botao.dataset.tela === itemDoMenu);
+    const atual = botao.dataset.tela === itemDoMenu;
+    botao.classList.toggle("atual", atual);
+    if (atual) { botao.setAttribute("aria-current", "page"); }
+    else { botao.removeAttribute("aria-current"); }
   });
 
   // No celular, o menu fecha sozinho depois de escolher uma tela
@@ -68,18 +77,36 @@ function mostrarTela(idDaTela) {
   if (idDaTela === "tela-inicio") { atualizarResumo(); }
   if (idDaTela === "tela-acompanhar") { atualizarAcompanhar(); }
   if (idDaTela === "tela-perfil") { atualizarPerfil(); }
+
+  // O título da aba acompanha a tela
+  const titulo = telaNova.querySelector("h1");
+  const nomeDaTela = titulos[idDaTela] || (titulo ? titulo.textContent : "");
+  document.title = nomeDaTela ? nomeDaTela + " · " + NOME_DO_SITE : NOME_DO_SITE;
+
   window.scrollTo(0, 0);
+  if (moverFoco && titulo) { titulo.tabIndex = -1; titulo.focus({ preventScroll: true }); }
 }
+
+// O endereço guarda a tela atual (ex.: #denuncia).
+// Assim o botão "voltar" do navegador e o F5 funcionam.
+function irPara(idDaTela) {
+  const nome = idDaTela.replace("tela-", "");
+  if (location.hash === "#" + nome) { mostrarTela(idDaTela, true); }
+  else { location.hash = nome; }
+}
+window.addEventListener("hashchange", function () {
+  mostrarTela("tela-" + location.hash.slice(1), true);
+});
 
 // Qualquer elemento com data-tela="..." leva para aquela tela
 document.addEventListener("click", function (evento) {
   const alvo = evento.target.closest("[data-tela]");
-  if (alvo) { mostrarTela(alvo.dataset.tela); }
+  if (alvo) { irPara(alvo.dataset.tela); }
 });
 
 // ===== 4. NOME (LOGIN DEMONSTRATIVO) =====
 function mostrarNome() {
-  const nome = ler("nomeDemo") || "Ana";
+  const nome = ler("nomeDemo") || "Visitante";
   document.querySelectorAll(".nome-usuario").forEach(function (lugar) {
     lugar.textContent = nome;
   });
@@ -87,7 +114,7 @@ function mostrarNome() {
 
 document.getElementById("btn-comecar").addEventListener("click", function () {
   // Se já existe nome salvo, pula o login
-  mostrarTela(ler("nomeDemo") ? "tela-inicio" : "tela-login");
+  irPara(ler("nomeDemo") ? "tela-inicio" : "tela-login");
 });
 
 formLogin.addEventListener("submit", function (evento) {
@@ -104,7 +131,7 @@ formLogin.addEventListener("submit", function (evento) {
   salvar("nomeDemo", nome);
   msgLogin.textContent = "";
   mostrarNome();
-  mostrarTela("tela-inicio");
+  irPara("tela-inicio");
 });
 
 // Perfil: trocar o nome de demonstração
@@ -126,14 +153,14 @@ document.getElementById("btn-sair").addEventListener("click", function () {
   campoNome.value = "";
   campoEntendi.checked = false;
   mostrarNome();
-  mostrarTela("tela-bemvindo");
+  irPara("tela-bemvindo");
 });
 
 // ===== 5. MODO CLARO E ESCURO =====
-function aplicarTema(escuro) {
+function aplicarTema(escuro, guardar) {
   document.body.classList.toggle("escuro", escuro);
   btnTema.textContent = escuro ? "Modo claro" : "Modo escuro";
-  salvar("tema", escuro ? "escuro" : "claro");
+  if (guardar !== false) { salvar("tema", escuro ? "escuro" : "claro"); }
 }
 btnTema.addEventListener("click", function () {
   aplicarTema(!document.body.classList.contains("escuro"));
@@ -142,7 +169,15 @@ btnTema.addEventListener("click", function () {
 // ===== 6. FORMULÁRIO DE DENÚNCIA (5 etapas) =====
 let etapaAtual = 1;
 
-function mostrarEtapa(numero) {
+const campoData = document.getElementById("data");
+// Data de hoje no formato AAAA-MM-DD (horário local)
+function hojeISO() {
+  const d = new Date();
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
+campoData.max = hojeISO(); // não deixa escolher data futura
+
+function mostrarEtapa(numero, moverFoco) {
   etapaAtual = numero;
   // Mostra só a etapa atual
   document.querySelectorAll(".etapa").forEach(function (etapa) {
@@ -152,12 +187,19 @@ function mostrarEtapa(numero) {
   document.querySelectorAll("#passos li").forEach(function (passo, indice) {
     passo.classList.toggle("atual", indice + 1 === numero);
     passo.classList.toggle("feito", indice + 1 < numero);
+    if (indice + 1 === numero) { passo.setAttribute("aria-current", "step"); }
+    else { passo.removeAttribute("aria-current"); }
   });
   btnVoltar.hidden = numero === 1 || numero === 5;
   btnContinuar.hidden = numero === 5;
   btnContinuar.textContent = numero === 4 ? "Concluir (demonstração)" : "Continuar";
   msgDenuncia.textContent = "";
   if (numero === 4) { montarRevisao(); }
+  if (moverFoco) {
+    const titulo = document.querySelector(".etapa.ativa h2");
+    titulo.tabIndex = -1;
+    titulo.focus();
+  }
 }
 
 // Contador de caracteres do relato
@@ -171,7 +213,7 @@ document.getElementById("anexos").addEventListener("change", function (evento) {
   lista.innerHTML = "";
   Array.from(evento.target.files).forEach(function (arquivo) {
     const item = document.createElement("li");
-    item.textContent = arquivo.name;
+    item.textContent = arquivo.name + " (" + Math.max(1, Math.round(arquivo.size / 1024)) + " KB)";
     lista.appendChild(item);
   });
 });
@@ -209,13 +251,20 @@ formDenuncia.addEventListener("submit", function (evento) {
   }
   if (etapaAtual === 2) {
     if (relato.value.trim().length < 10) {
-      msgDenuncia.textContent = "Escreva um texto com pelo menos 10 letras.";
+      msgDenuncia.textContent = "Escreva um texto com pelo menos 10 caracteres.";
+      relato.focus();
       return;
     }
     if (document.getElementById("plataforma").value === "") {
       msgDenuncia.textContent = "Selecione onde aconteceu.";
+      document.getElementById("plataforma").focus();
       return;
     }
+  }
+  if (etapaAtual === 2 && campoData.value > hojeISO()) {
+    msgDenuncia.textContent = "A data não pode ser no futuro.";
+    campoData.focus();
+    return;
   }
   if (etapaAtual === 4) {
     if (!document.getElementById("confirmo").checked) {
@@ -229,18 +278,30 @@ formDenuncia.addEventListener("submit", function (evento) {
     salvar("statusDemo", "0");
     document.getElementById("protocolo").textContent = protocolo;
   }
-  mostrarEtapa(etapaAtual + 1);
+  mostrarEtapa(etapaAtual + 1, true);
 });
 
 btnVoltar.addEventListener("click", function () {
-  mostrarEtapa(etapaAtual - 1);
+  mostrarEtapa(etapaAtual - 1, true);
 });
 
 document.getElementById("btn-nova").addEventListener("click", function () {
   formDenuncia.reset();
   contador.textContent = "0/1000";
   document.getElementById("lista-anexos").innerHTML = "";
-  mostrarEtapa(1);
+  mostrarEtapa(1, true);
+});
+
+// Copia o protocolo fictício (se o navegador permitir)
+document.getElementById("btn-copiar").addEventListener("click", function () {
+  const botao = this;
+  function avisar(texto) {
+    botao.textContent = texto;
+    setTimeout(function () { botao.textContent = "Copiar protocolo"; }, 2000);
+  }
+  if (!navigator.clipboard) { avisar("Não foi possível copiar"); return; }
+  navigator.clipboard.writeText(document.getElementById("protocolo").textContent)
+    .then(function () { avisar("Copiado!"); }, function () { avisar("Não foi possível copiar"); });
 });
 
 // ===== 7. ACOMPANHAR DENÚNCIAS (dados fictícios) =====
@@ -337,9 +398,24 @@ btnMenu.addEventListener("click", function () {
 });
 btnFecharMenu.addEventListener("click", function () { abrirMenu(false); });
 fundoMenu.addEventListener("click", function () { abrirMenu(false); });
+// Esc fecha o menu. Esc 3 vezes seguidas aciona a saída rápida.
+let pressionadas = [];
 document.addEventListener("keydown", function (evento) {
-  if (evento.key === "Escape") { abrirMenu(false); }
+  if (evento.key !== "Escape") { return; }
+  abrirMenu(false);
+  const agora = Date.now();
+  pressionadas = pressionadas.filter(function (t) { return agora - t < 1500; });
+  pressionadas.push(agora);
+  if (pressionadas.length >= 3) { saidaRapida(); }
 });
+
+// ===== SAÍDA RÁPIDA =====
+// Abre uma página neutra e tira o site da aba atual (útil se alguém se aproximar).
+function saidaRapida() {
+  window.open("https://www.google.com.br", "_blank");
+  window.location.replace("https://www.google.com.br");
+}
+document.getElementById("btn-saida").addEventListener("click", saidaRapida);
 
 // ===== 10. RESUMO E PERFIL (dados de demonstração) =====
 // Textos reaproveitados no resumo da tela inicial e no perfil
@@ -374,6 +450,7 @@ function atualizarPerfil() {
 
 // Apaga tudo o que o site guardou neste navegador
 document.getElementById("btn-apagar-tudo").addEventListener("click", function () {
+  if (!confirm("Apagar todos os dados guardados neste navegador?")) { return; }
   ["nomeDemo", "tema", "protocoloDemo", "dataProtocoloDemo", "statusDemo", "checklistDemo"].forEach(apagar);
   campoNome.value = "";
   campoEntendi.checked = false;
@@ -381,7 +458,7 @@ document.getElementById("btn-apagar-tudo").addEventListener("click", function ()
   apagar("tema");
   mostrarNome();
   carregarChecklist();
-  mostrarTela("tela-bemvindo");
+  irPara("tela-bemvindo");
 });
 
 // ===== 11. LOGOTIPO RESERVA =====
@@ -408,10 +485,18 @@ document.querySelectorAll("img").forEach(function (imagem) {
 });
 
 // ===== 12. AO ABRIR A PÁGINA (inclusive depois do F5) =====
-aplicarTema(ler("tema") === "escuro");
+// Se a pessoa nunca escolheu, segue o modo do aparelho (sem guardar nada)
+const temaSalvo = ler("tema");
+const aparelhoEscuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+aplicarTema(temaSalvo ? temaSalvo === "escuro" : aparelhoEscuro, false);
 mostrarNome();
 mostrarEtapa(1);
 carregarChecklist();
 abrirMenu(window.innerWidth >= 900); // aberto no computador, fechado no celular
-// Se já fez o login demonstrativo antes, volta direto para o início
-if (ler("nomeDemo")) { mostrarTela("tela-inicio"); }
+// Abre a tela do endereço (#denuncia, #apoio...). Sem endereço, vai ao início se já fez o login.
+const telaDoEndereco = "tela-" + location.hash.slice(1);
+if (location.hash.length > 1 && document.getElementById(telaDoEndereco)) {
+  mostrarTela(telaDoEndereco, false);
+} else if (ler("nomeDemo")) {
+  irPara("tela-inicio");
+}

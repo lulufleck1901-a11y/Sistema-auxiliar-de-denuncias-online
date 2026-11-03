@@ -322,3 +322,44 @@ textarea { height: 150px; resize: vertical; }
   display: grid; place-items: center; font-size: 28px; font-weight: 700; flex: none;
 }
 .perfil-topo h1 { margin: 0; }
+
+/* ===== 14. ACESSIBILIDADE, SEGURANÇA E RESPONSIVIDADE ===== */
+/* Campo de arquivo escondido só visualmente (continua acessível pelo teclado) */
+.so-leitor { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; opacity: 0; overflow: hidden; }
+#anexos:focus-visible + .area-anexo { outline: 2px solid var(--rosa); outline-offset: 2px; }
+
+/* Link "pular para o conteúdo" (aparece só ao navegar pelo teclado) */
+.pular { position: absolute; left: 8px; top: -60px; z-index: 100; background: var(--rosa); color: #fff; padding: 8px 14px; border-radius: 6px; font-weight: 600; text-decoration: none; }
+.pular:focus { top: 8px; }
+.aviso-noscript { margin: 0; padding: 12px 20px; text-align: center; font-weight: 600; background: var(--alerta); color: var(--vermelho); }
+
+/* Botão de saída rápida, sempre visível */
+.saida-rapida {
+  position: fixed; right: 12px; bottom: 12px; z-index: 40; min-height: 44px; padding: 10px 16px;
+  background: #374151; color: #fff; border: 2px solid #fff; border-radius: 22px;
+  font-size: 13px; font-weight: 700; box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+}
+.saida-rapida:hover { background: #111827; }
+
+/* Rodapé */
+.rodape { padding-bottom: 72px; }
+.rodape p { margin: 4px 0; }
+.rodape a { color: var(--rosa-escuro); font-weight: 600; }
+.rodape .link { font-size: 12px; padding: 0; }
+
+/* Detalhes de usabilidade */
+h1:focus, h2:focus, main:focus { outline: none; }
+.revisao-linha { overflow-wrap: anywhere; white-space: pre-wrap; }
+.tipos label { position: relative; }
+.botao, .botao-claro { min-height: 44px; }
+.bemvindo { min-height: 100svh; }
+.bemvindo .link { color: var(--texto); }
+
+/* Evita cortar conteúdo em celulares estreitos (320px) */
+.linhas-grade { grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
+.grade { grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); }
+@media (max-width: 480px) { .pill, .faixa .ligar { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
