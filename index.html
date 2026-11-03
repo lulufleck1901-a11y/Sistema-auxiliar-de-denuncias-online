@@ -10,6 +10,8 @@
 
   <!-- Ícones simples (desenhados uma vez e reutilizados com <use>) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
     <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
     <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></symbol>
@@ -30,25 +32,34 @@
     <symbol id="i-list" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></symbol>
   </svg>
 
-  <!-- Estrutura: menu + conteúdo (o menu NÃO é fixo, rola junto com a página) -->
+  <!-- ===== CABEÇALHO (aparece nas telas internas) ===== -->
+  <header class="cabecalho-site">
+    <button id="btn-menu" class="btn-icone" aria-label="Abrir ou fechar o menu" aria-controls="menu" aria-expanded="false">
+      <svg class="ic"><use href="#i-menu"/></svg>
+    </button>
+    <img class="logo-pequeno" src="escudo.png" alt="Logotipo do projeto">
+    <span class="nome-site">Sistema Auxiliar de Denúncias <span class="nome-longo">Online</span></span>
+    <a class="btn-180" href="tel:180"><svg class="ic"><use href="#i-phone"/></svg>Ligue 180</a>
+  </header>
+
   <div class="app">
 
-    <!-- Menu: lateral no computador, no fim da página no celular -->
-    <nav id="menu" aria-label="Menu principal">
-      <img class="menu-logo" src="escudo.png" alt="Logotipo do projeto">
+    <!-- ===== MENU (abre e fecha pelo botão do cabeçalho) ===== -->
+    <aside id="menu" aria-label="Menu principal">
+      <div class="menu-topo">
+        <strong>Menu</strong>
+        <button id="btn-fechar-menu" class="btn-icone" aria-label="Fechar o menu"><svg class="ic"><use href="#i-close"/></svg></button>
+      </div>
       <button data-tela="tela-inicio"><svg class="ic"><use href="#i-home"/></svg>Início</button>
       <button data-tela="tela-denuncia"><svg class="ic"><use href="#i-doc"/></svg>Denunciar</button>
+      <button data-tela="tela-acompanhar"><svg class="ic"><use href="#i-search"/></svg>Acompanhar</button>
       <button data-tela="tela-apoio"><svg class="ic"><use href="#i-heart"/></svg>Apoio</button>
       <button data-tela="tela-recursos"><svg class="ic"><use href="#i-grid"/></svg>Recursos</button>
       <button data-tela="tela-perfil"><svg class="ic"><use href="#i-user"/></svg>Perfil</button>
-    </nav>
+    </aside>
+    <div id="fundo-menu" class="fundo-menu"></div>
 
     <main>
-      <!-- Logotipo no topo das telas internas (só no celular) -->
-      <header class="topo">
-        <img class="logo-pequeno" src="escudo.png" alt="Logotipo do projeto">
-        <span>Sistema Auxiliar de Denúncias</span>
-      </header>
 
       <!-- ===== TELA: BOAS-VINDAS ===== -->
       <section id="tela-bemvindo" class="tela ativa">
@@ -81,121 +92,167 @@
 
       <!-- ===== TELA: INÍCIO ===== -->
       <section id="tela-inicio" class="tela pagina">
-        <h1>Olá, <span class="nome-usuario">Ana</span>!</h1>
-        <p class="suave">Para onde iremos hoje?</p>
+        <div class="layout-2">
+          <div>
+            <h1>Olá, <span class="nome-usuario">Ana</span>!</h1>
+            <p class="suave">Para onde iremos hoje?</p>
 
-        <button class="destaque" data-tela="tela-apoio">
-          <span class="icone-branco"><svg class="ic"><use href="#i-shield"/></svg></span>
-          <span><strong>Precisa de ajuda agora?</strong><br><small>Acolhimento imediato, anônimo e gratuito.</small></span>
-          <svg class="ic seta"><use href="#i-arrow"/></svg>
-        </button>
+            <button class="destaque" data-tela="tela-apoio">
+              <span class="icone-branco"><svg class="ic"><use href="#i-shield"/></svg></span>
+              <span><strong>Precisa de ajuda agora?</strong><br><small>Acolhimento imediato, anônimo e gratuito.</small></span>
+              <svg class="ic seta"><use href="#i-arrow"/></svg>
+            </button>
 
-        <h2>O que você deseja fazer?</h2>
-        <div class="grade">
-          <button class="cartao c-rosa" data-tela="tela-denuncia">
-            <span class="icone"><svg class="ic"><use href="#i-doc"/></svg></span>
-            <strong>Fazer uma denúncia</strong><small>Inicie um relato seguro e anônimo</small>
-          </button>
-          <button class="cartao c-vermelho" data-tela="tela-acompanhar">
-            <span class="icone"><svg class="ic"><use href="#i-search"/></svg></span>
-            <strong>Acompanhar denúncias</strong><small>Veja o andamento e atualizações de relatos enviados</small>
-          </button>
-          <button class="cartao c-vinho" data-tela="tela-apoio">
-            <span class="icone"><svg class="ic"><use href="#i-heart"/></svg></span>
-            <strong>Recursos e apoio</strong><small>Canais de ajuda, apoio psicológico e jurídico</small>
-          </button>
-          <button class="cartao c-coral" data-tela="tela-direitos">
-            <span class="icone"><svg class="ic"><use href="#i-book"/></svg></span>
-            <strong>Sobre direitos</strong><small>Conheça as leis, direitos das mulheres e cartilhas</small>
-          </button>
+            <h2>O que você deseja fazer?</h2>
+            <div class="grade">
+              <button class="cartao c-rosa" data-tela="tela-denuncia">
+                <span class="icone"><svg class="ic"><use href="#i-doc"/></svg></span>
+                <strong>Fazer uma denúncia</strong><small>Inicie um relato seguro e anônimo</small>
+              </button>
+              <button class="cartao c-vermelho" data-tela="tela-acompanhar">
+                <span class="icone"><svg class="ic"><use href="#i-search"/></svg></span>
+                <strong>Acompanhar denúncias</strong><small>Veja o andamento e atualizações de relatos enviados</small>
+              </button>
+              <button class="cartao c-vinho" data-tela="tela-apoio">
+                <span class="icone"><svg class="ic"><use href="#i-heart"/></svg></span>
+                <strong>Recursos e apoio</strong><small>Canais de ajuda, apoio psicológico e jurídico</small>
+              </button>
+              <button class="cartao c-coral" data-tela="tela-direitos">
+                <span class="icone"><svg class="ic"><use href="#i-book"/></svg></span>
+                <strong>Sobre direitos</strong><small>Conheça as leis, direitos das mulheres e cartilhas</small>
+              </button>
+            </div>
+
+            <button class="faixa" data-tela="tela-apoio">
+              <span class="faixa-texto"><svg class="ic"><use href="#i-phone"/></svg>Precisa de ajuda agora? Acolhimento imediato e gratuito 24h</span>
+              <svg class="ic"><use href="#i-arrow"/></svg>
+            </button>
+          </div>
+
+          <!-- Painel lateral: resumo com dados de demonstração -->
+          <aside class="lateral">
+            <div class="painel">
+              <h3>Seu resumo</h3>
+              <p class="suave">Última denúncia (demonstração)</p>
+              <p id="resumo-denuncia" class="resumo-valor">Nenhuma ainda</p>
+              <p class="suave">Segurança digital</p>
+              <p id="resumo-seguranca" class="resumo-valor">0 de 5 dicas</p>
+              <div class="barra"><div id="barra-seguranca"></div></div>
+              <button class="link" data-tela="tela-seguranca">Ver checklist</button>
+            </div>
+            <div class="painel">
+              <h3>Telefones úteis</h3>
+              <a class="mini" href="tel:180"><span class="chip-num">180</span>Central de Atendimento à Mulher</a>
+              <a class="mini" href="tel:190"><span class="chip-num">190</span>Polícia Militar</a>
+              <a class="mini" href="tel:188"><span class="chip-num">188</span>CVV, apoio emocional</a>
+            </div>
+          </aside>
         </div>
-
-        <button class="faixa" data-tela="tela-apoio">
-          <span class="faixa-texto"><svg class="ic"><use href="#i-phone"/></svg>Precisa de ajuda agora? Acolhimento imediato e gratuito 24h</span>
-          <svg class="ic"><use href="#i-arrow"/></svg>
-        </button>
       </section>
 
       <!-- ===== TELA: DENÚNCIA (5 etapas) ===== -->
       <section id="tela-denuncia" class="tela pagina">
-        <ol id="passos">
-          <li class="atual"><span class="num">1</span><span class="rotulo">Ocorrido</span></li>
-          <li><span class="num">2</span><span class="rotulo">Detalhes</span></li>
-          <li><span class="num">3</span><span class="rotulo">Anexos</span></li>
-          <li><span class="num">4</span><span class="rotulo">Revisão</span></li>
-          <li><span class="num">5</span><span class="rotulo">Conclusão</span></li>
-        </ol>
-        <p class="aviso-demo">Protótipo de demonstração: nenhum relato é enviado ou guardado. Use apenas texto fictício.</p>
+        <h1>Fazer uma denúncia</h1>
+        <p class="suave">Siga as etapas. Leva poucos minutos.</p>
 
-        <form id="form-denuncia">
-          <!-- Etapa 1 -->
-          <div class="etapa ativa" data-etapa="1">
-            <h2>Sobre o ocorrido</h2>
-            <p class="suave">Conte-nos o que aconteceu. Escolha a opção que melhor define a situação.</p>
-            <label>Tipo de ocorrência</label>
-            <div class="tipos">
-              <label><input type="radio" name="tipo" value="Assédio"><span><svg class="ic"><use href="#i-hand"/></svg>Assédio</span></label>
-              <label><input type="radio" name="tipo" value="Ameaça"><span><svg class="ic"><use href="#i-alert"/></svg>Ameaça</span></label>
-              <label><input type="radio" name="tipo" value="Violência"><span><svg class="ic"><use href="#i-heart"/></svg>Violência</span></label>
-              <label><input type="radio" name="tipo" value="Discriminação"><span><svg class="ic"><use href="#i-users"/></svg>Discriminação</span></label>
-              <label><input type="radio" name="tipo" value="Stalking Online"><span><svg class="ic"><use href="#i-x"/></svg>Stalking Online</span></label>
-              <label><input type="radio" name="tipo" value="Outro"><span><svg class="ic"><use href="#i-list"/></svg>Outro</span></label>
+        <div class="layout-2">
+          <div class="painel">
+            <ol id="passos">
+              <li class="atual"><span class="num">1</span><span class="rotulo">Ocorrido</span></li>
+              <li><span class="num">2</span><span class="rotulo">Detalhes</span></li>
+              <li><span class="num">3</span><span class="rotulo">Anexos</span></li>
+              <li><span class="num">4</span><span class="rotulo">Revisão</span></li>
+              <li><span class="num">5</span><span class="rotulo">Conclusão</span></li>
+            </ol>
+            <p class="aviso-demo">Protótipo de demonstração: nenhum relato é enviado ou guardado. Use apenas texto fictício.</p>
+
+            <form id="form-denuncia">
+              <!-- Etapa 1 -->
+              <div class="etapa ativa" data-etapa="1">
+                <h2>Sobre o ocorrido</h2>
+                <p class="suave">Conte-nos o que aconteceu. Escolha a opção que melhor define a situação.</p>
+                <label>Tipo de ocorrência</label>
+                <div class="tipos">
+                  <label><input type="radio" name="tipo" value="Assédio"><span><svg class="ic"><use href="#i-hand"/></svg>Assédio</span></label>
+                  <label><input type="radio" name="tipo" value="Ameaça"><span><svg class="ic"><use href="#i-alert"/></svg>Ameaça</span></label>
+                  <label><input type="radio" name="tipo" value="Violência"><span><svg class="ic"><use href="#i-heart"/></svg>Violência</span></label>
+                  <label><input type="radio" name="tipo" value="Discriminação"><span><svg class="ic"><use href="#i-users"/></svg>Discriminação</span></label>
+                  <label><input type="radio" name="tipo" value="Stalking Online"><span><svg class="ic"><use href="#i-x"/></svg>Stalking Online</span></label>
+                  <label><input type="radio" name="tipo" value="Outro"><span><svg class="ic"><use href="#i-list"/></svg>Outro</span></label>
+                </div>
+              </div>
+
+              <!-- Etapa 2 -->
+              <div class="etapa" data-etapa="2">
+                <h2>Detalhes</h2>
+                <p class="suave">Conte mais sobre o que aconteceu. Seu relato é mantido sob sigilo.</p>
+                <label for="relato">Relato do ocorrido</label>
+                <textarea id="relato" maxlength="1000" placeholder="Escreva em detalhes o que aconteceu..."></textarea>
+                <p id="contador" class="contador">0/1000</p>
+                <label for="plataforma">Onde aconteceu?</label>
+                <select id="plataforma">
+                  <option value="">Selecione a plataforma</option>
+                  <option>Instagram</option><option>WhatsApp</option><option>TikTok</option>
+                  <option>Facebook</option><option>Jogos online</option><option>Outra</option>
+                </select>
+                <label>Quando aconteceu?</label>
+                <div class="duas-colunas">
+                  <input id="data" type="date" aria-label="Data">
+                  <input id="hora" type="time" aria-label="Hora">
+                </div>
+              </div>
+
+              <!-- Etapa 3 -->
+              <div class="etapa" data-etapa="3">
+                <h2>Anexos</h2>
+                <p class="suave">Prints e links ajudam como prova. Nesta demonstração, nenhum arquivo é enviado.</p>
+                <label for="anexos" class="area-anexo">Clique para escolher arquivos (opcional)</label>
+                <input id="anexos" type="file" multiple hidden>
+                <ul id="lista-anexos"></ul>
+              </div>
+
+              <!-- Etapa 4 -->
+              <div class="etapa" data-etapa="4">
+                <h2>Revisão</h2>
+                <p class="suave">Confira as informações antes de concluir.</p>
+                <div id="revisao" class="caixa"></div>
+                <label class="marcar"><input id="confirmo" type="checkbox"> Entendi que nada será enviado ou guardado.</label>
+              </div>
+
+              <!-- Etapa 5 -->
+              <div class="etapa" data-etapa="5">
+                <h2>Concluído (demonstração)</h2>
+                <p>Seu protocolo fictício é:</p>
+                <p class="protocolo" id="protocolo">DEMO-0000</p>
+                <p class="suave">Nada foi enviado. Em caso de risco, ligue 180 ou 190.</p>
+                <button type="button" id="btn-nova" class="botao">Nova denúncia</button>
+                <button type="button" class="botao-claro" data-tela="tela-acompanhar">Acompanhar</button>
+              </div>
+
+              <p id="msg-denuncia" class="mensagem" role="alert"></p>
+              <div class="botoes-form">
+                <button type="button" id="btn-voltar" class="botao-claro" hidden>Voltar</button>
+                <button type="submit" id="btn-continuar" class="botao">Continuar</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Painel lateral com orientações -->
+          <aside class="lateral">
+            <div class="painel">
+              <h3>Antes de começar</h3>
+              <ul class="lista-simples">
+                <li>Escolha o tipo de ocorrência que mais se aproxima.</li>
+                <li>Prints e links podem ajudar como prova.</li>
+                <li>Você pode voltar e corrigir qualquer etapa.</li>
+              </ul>
             </div>
-          </div>
-
-          <!-- Etapa 2 -->
-          <div class="etapa" data-etapa="2">
-            <h2>Detalhes</h2>
-            <p class="suave">Conte mais sobre o que aconteceu. Seu relato é mantido sob sigilo.</p>
-            <label for="relato">Relato do ocorrido</label>
-            <textarea id="relato" maxlength="1000" placeholder="Escreva em detalhes o que aconteceu..."></textarea>
-            <p id="contador" class="contador">0/1000</p>
-            <label for="plataforma">Onde aconteceu?</label>
-            <select id="plataforma">
-              <option value="">Selecione a plataforma</option>
-              <option>Instagram</option><option>WhatsApp</option><option>TikTok</option>
-              <option>Facebook</option><option>Jogos online</option><option>Outra</option>
-            </select>
-            <label>Quando aconteceu?</label>
-            <div class="duas-colunas">
-              <input id="data" type="date" aria-label="Data">
-              <input id="hora" type="time" aria-label="Hora">
-            </div>
-          </div>
-
-          <!-- Etapa 3 -->
-          <div class="etapa" data-etapa="3">
-            <h2>Anexos</h2>
-            <p class="suave">Prints e links ajudam como prova. Nesta demonstração, nenhum arquivo é enviado.</p>
-            <label for="anexos" class="area-anexo">Clique para escolher arquivos (opcional)</label>
-            <input id="anexos" type="file" multiple hidden>
-            <ul id="lista-anexos"></ul>
-          </div>
-
-          <!-- Etapa 4 -->
-          <div class="etapa" data-etapa="4">
-            <h2>Revisão</h2>
-            <p class="suave">Confira as informações antes de concluir.</p>
-            <div id="revisao" class="caixa"></div>
-            <label class="marcar"><input id="confirmo" type="checkbox"> Entendi que nada será enviado ou guardado.</label>
-          </div>
-
-          <!-- Etapa 5 -->
-          <div class="etapa" data-etapa="5">
-            <h2>Concluído (demonstração)</h2>
-            <p>Seu protocolo fictício é:</p>
-            <p class="protocolo" id="protocolo">DEMO-0000</p>
-            <p class="suave">Nada foi enviado. Em caso de risco, ligue 180 ou 190.</p>
-            <button type="button" id="btn-nova" class="botao">Nova denúncia</button>
-            <button type="button" class="botao-claro" data-tela="tela-acompanhar">Acompanhar</button>
-          </div>
-
-          <p id="msg-denuncia" class="mensagem" role="alert"></p>
-          <div class="botoes-form">
-            <button type="button" id="btn-voltar" class="botao-claro" hidden>Voltar</button>
-            <button type="submit" id="btn-continuar" class="botao">Continuar</button>
-          </div>
-        </form>
+            <a class="emergencia" href="tel:190">
+              <span class="icone-branco"><svg class="ic"><use href="#i-phone"/></svg></span>
+              <span><strong>Risco imediato?</strong><br><small>Ligue 190. Orientação 24h: 180.</small></span>
+            </a>
+          </aside>
+        </div>
       </section>
 
       <!-- ===== TELA: ACOMPANHAR ===== -->
@@ -203,7 +260,7 @@
         <h1>Acompanhar denúncias</h1>
         <p class="suave">Veja o andamento dos relatos enviados.</p>
         <p class="aviso-demo">Dados fictícios de demonstração, guardados só neste navegador.</p>
-        <div id="lista-acompanhar" class="caixa"></div>
+        <div id="lista-acompanhar" class="painel"></div>
         <button id="btn-atualizar" class="botao">Simular atualização</button>
         <button id="btn-limpar-demo" class="botao-claro">Limpar dados de demonstração</button>
       </section>
@@ -218,26 +275,28 @@
           <span><strong>Emergência</strong><br><small>Em caso de risco imediato, ligue para o 190. Orientação 24h: 180.</small></span>
         </a>
 
-        <button class="linha c-rosa" data-tela="tela-rede">
-          <span class="icone"><svg class="ic"><use href="#i-heart"/></svg></span>
-          <span><strong>Apoio emocional</strong><small>Atendimento acolhedor e sigiloso para desabafar</small></span>
-          <svg class="ic chev"><use href="#i-chev"/></svg>
-        </button>
-        <button class="linha c-vinho" data-tela="tela-direitos">
-          <span class="icone"><svg class="ic"><use href="#i-scale"/></svg></span>
-          <span><strong>Ajuda jurídica</strong><small>Orientação e informação legal sobre as leis vigentes</small></span>
-          <svg class="ic chev"><use href="#i-chev"/></svg>
-        </button>
-        <button class="linha c-vermelho" data-tela="tela-canais">
-          <span class="icone"><svg class="ic"><use href="#i-phone"/></svg></span>
-          <span><strong>Canais de denúncia</strong><small>Lista de canais oficiais, delegacias especializadas e contatos de apoio</small></span>
-          <svg class="ic chev"><use href="#i-chev"/></svg>
-        </button>
-        <button class="linha c-coral" data-tela="tela-seguranca">
-          <span class="icone"><svg class="ic"><use href="#i-book"/></svg></span>
-          <span><strong>Materiais de apoio</strong><small>Guias passo a passo, cartilhas explicativas e segurança digital</small></span>
-          <svg class="ic chev"><use href="#i-chev"/></svg>
-        </button>
+        <div class="linhas-grade">
+          <button class="linha c-rosa" data-tela="tela-rede">
+            <span class="icone"><svg class="ic"><use href="#i-heart"/></svg></span>
+            <span><strong>Apoio emocional</strong><small>Atendimento acolhedor e sigiloso para desabafar</small></span>
+            <svg class="ic chev"><use href="#i-chev"/></svg>
+          </button>
+          <button class="linha c-vinho" data-tela="tela-direitos">
+            <span class="icone"><svg class="ic"><use href="#i-scale"/></svg></span>
+            <span><strong>Ajuda jurídica</strong><small>Orientação e informação legal sobre as leis vigentes</small></span>
+            <svg class="ic chev"><use href="#i-chev"/></svg>
+          </button>
+          <button class="linha c-vermelho" data-tela="tela-canais">
+            <span class="icone"><svg class="ic"><use href="#i-phone"/></svg></span>
+            <span><strong>Canais de denúncia</strong><small>Lista de canais oficiais, delegacias especializadas e contatos de apoio</small></span>
+            <svg class="ic chev"><use href="#i-chev"/></svg>
+          </button>
+          <button class="linha c-coral" data-tela="tela-seguranca">
+            <span class="icone"><svg class="ic"><use href="#i-book"/></svg></span>
+            <span><strong>Materiais de apoio</strong><small>Guias passo a passo, cartilhas explicativas e segurança digital</small></span>
+            <svg class="ic chev"><use href="#i-chev"/></svg>
+          </button>
+        </div>
       </section>
 
       <!-- ===== TELA: RECURSOS ===== -->
@@ -269,11 +328,13 @@
         <button class="voltar" data-tela="tela-apoio">← Voltar</button>
         <h1>Rede de apoio</h1>
         <p class="suave">Atendimento acolhedor e sigiloso. Você pode ligar a qualquer momento.</p>
-        <a class="linha c-rosa" href="tel:188"><span class="icone"><svg class="ic"><use href="#i-heart"/></svg></span><span><strong>CVV</strong><small>Apoio emocional, 24h e gratuito</small></span><span class="numero">188</span></a>
-        <a class="linha c-vinho" href="tel:180"><span class="icone"><svg class="ic"><use href="#i-phone"/></svg></span><span><strong>Central de Atendimento à Mulher</strong><small>Orientação e encaminhamento, 24h</small></span><span class="numero">180</span></a>
-        <div class="caixa">
+        <div class="linhas-grade">
+          <a class="linha c-rosa" href="tel:188"><span class="icone"><svg class="ic"><use href="#i-heart"/></svg></span><span><strong>CVV</strong><small>Apoio emocional, 24h e gratuito</small></span><span class="numero">188</span></a>
+          <a class="linha c-vinho" href="tel:180"><span class="icone"><svg class="ic"><use href="#i-phone"/></svg></span><span><strong>Central de Atendimento à Mulher</strong><small>Orientação e encaminhamento, 24h</small></span><span class="numero">180</span></a>
+        </div>
+        <div class="painel">
           <p><strong>Também procure:</strong></p>
-          <ul>
+          <ul class="lista-simples">
             <li>Centros de Referência de Atendimento à Mulher e a Casa da Mulher Brasileira (a disponibilidade varia por cidade).</li>
             <li>Uma pessoa de confiança, como familiar, amiga ou professora.</li>
             <li>O serviço de assistência social (CRAS ou CREAS) do seu município.</li>
@@ -286,14 +347,16 @@
         <button class="voltar" data-tela="tela-recursos">← Voltar</button>
         <h1>Seus direitos</h1>
         <p class="suave">Informação geral. Não substitui a orientação de um(a) advogado(a) ou defensor(a).</p>
-        <details class="item"><summary>Lei Maria da Penha (Lei 11.340/2006)</summary>
-          <p>Protege mulheres contra violência doméstica e familiar e prevê medidas protetivas de urgência.</p></details>
-        <details class="item"><summary>Perseguição / stalking (Lei 14.132/2021)</summary>
-          <p>Criou o crime de perseguição, inclusive quando acontece pela internet.</p></details>
-        <details class="item"><summary>Importunação sexual (Lei 13.718/2018)</summary>
-          <p>Trata da importunação sexual e da divulgação de imagens íntimas sem consentimento.</p></details>
-        <details class="item"><summary>Invasão de dispositivos (Lei 12.737/2012)</summary>
-          <p>Pune a invasão de aparelhos e contas para obter dados.</p></details>
+        <div class="linhas-grade">
+          <details class="item"><summary>Lei Maria da Penha (Lei 11.340/2006)</summary>
+            <p>Protege mulheres contra violência doméstica e familiar e prevê medidas protetivas de urgência.</p></details>
+          <details class="item"><summary>Perseguição / stalking (Lei 14.132/2021)</summary>
+            <p>Criou o crime de perseguição, inclusive quando acontece pela internet.</p></details>
+          <details class="item"><summary>Importunação sexual (Lei 13.718/2018)</summary>
+            <p>Trata da importunação sexual e da divulgação de imagens íntimas sem consentimento.</p></details>
+          <details class="item"><summary>Invasão de dispositivos (Lei 12.737/2012)</summary>
+            <p>Pune a invasão de aparelhos e contas para obter dados.</p></details>
+        </div>
         <p class="suave">Atendimento jurídico gratuito: procure a Defensoria Pública do seu estado.</p>
       </section>
 
@@ -302,10 +365,12 @@
         <button class="voltar" data-tela="tela-recursos">← Voltar</button>
         <h1>Canais oficiais</h1>
         <p class="suave">Telefones e serviços para denunciar e pedir orientação.</p>
-        <a class="linha c-rosa" href="tel:180"><span class="icone"><svg class="ic"><use href="#i-phone"/></svg></span><span><strong>Ligue 180</strong><small>Central de Atendimento à Mulher, 24h</small></span><span class="numero">180</span></a>
-        <a class="linha c-vermelho" href="tel:190"><span class="icone"><svg class="ic"><use href="#i-shield"/></svg></span><span><strong>Polícia Militar</strong><small>Emergências e risco imediato</small></span><span class="numero">190</span></a>
-        <a class="linha c-vinho" href="tel:100"><span class="icone"><svg class="ic"><use href="#i-users"/></svg></span><span><strong>Disque 100</strong><small>Violações de direitos humanos</small></span><span class="numero">100</span></a>
-        <div class="caixa">
+        <div class="linhas-grade">
+          <a class="linha c-rosa" href="tel:180"><span class="icone"><svg class="ic"><use href="#i-phone"/></svg></span><span><strong>Ligue 180</strong><small>Central de Atendimento à Mulher, 24h</small></span><span class="numero">180</span></a>
+          <a class="linha c-vermelho" href="tel:190"><span class="icone"><svg class="ic"><use href="#i-shield"/></svg></span><span><strong>Polícia Militar</strong><small>Emergências e risco imediato</small></span><span class="numero">190</span></a>
+          <a class="linha c-vinho" href="tel:100"><span class="icone"><svg class="ic"><use href="#i-users"/></svg></span><span><strong>Disque 100</strong><small>Violações de direitos humanos</small></span><span class="numero">100</span></a>
+        </div>
+        <div class="painel">
           <p><strong>Delegacia da Mulher (DEAM):</strong> atendimento especializado presencial. Procure a mais próxima da sua cidade.</p>
           <p><strong>SaferNet Brasil:</strong> recebe denúncias de crimes e violações na internet.</p>
         </div>
@@ -316,7 +381,7 @@
         <button class="voltar" data-tela="tela-recursos">← Voltar</button>
         <h1>Segurança digital</h1>
         <p class="suave">Marque o que você já fez. O progresso fica salvo neste navegador (demonstração).</p>
-        <div class="caixa">
+        <div class="painel">
           <label class="marcar"><input type="checkbox" class="item-check" value="senhas"> Usar senhas diferentes em cada conta</label>
           <label class="marcar"><input type="checkbox" class="item-check" value="duas"> Ativar a verificação em duas etapas</label>
           <label class="marcar"><input type="checkbox" class="item-check" value="privado"> Deixar os perfis privados</label>
@@ -330,23 +395,26 @@
       <section id="tela-perfil" class="tela pagina">
         <h1>Perfil</h1>
         <p class="aviso-demo">Dados de demonstração. Nada aqui é pessoal ou real.</p>
-        <div class="caixa">
-          <label for="perfil-nome">Nome de demonstração</label>
-          <input id="perfil-nome" type="text" maxlength="30">
-          <button id="btn-salvar-nome" class="botao">Salvar nome</button>
-          <p id="msg-perfil" class="mensagem ok" role="status"></p>
-        </div>
-        <div class="caixa">
-          <button id="btn-tema" class="botao-claro">Modo escuro</button>
-          <button class="botao-claro" data-tela="tela-sobre">Sobre o projeto</button>
-          <button id="btn-sair" class="botao-claro">Sair</button>
+        <div class="grade">
+          <div class="painel">
+            <label for="perfil-nome">Nome de demonstração</label>
+            <input id="perfil-nome" type="text" maxlength="30">
+            <button id="btn-salvar-nome" class="botao">Salvar nome</button>
+            <p id="msg-perfil" class="mensagem ok" role="status"></p>
+          </div>
+          <div class="painel">
+            <h3>Preferências</h3>
+            <button id="btn-tema" class="botao-claro">Modo escuro</button>
+            <button class="botao-claro" data-tela="tela-sobre">Sobre o projeto</button>
+            <button id="btn-sair" class="botao-claro">Sair</button>
+          </div>
         </div>
       </section>
 
       <!-- ===== TELA: SOBRE ===== -->
       <section id="tela-sobre" class="tela pagina">
         <h1>Sobre o projeto</h1>
-        <div class="caixa">
+        <div class="painel">
           <p>O <strong>Sistema Auxiliar de Denúncias Online</strong> é um projeto escolar do Curso Técnico em Informática. Ele quer ser um ambiente informativo, acolhedor e acessível para mulheres que enfrentam assédio, ameaças e violência nas plataformas digitais.</p>
           <p><strong>Este é um protótipo:</strong> não recebe nem envia denúncias reais e não guarda relatos.</p>
         </div>
@@ -354,6 +422,11 @@
       </section>
     </main>
   </div>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer class="rodape">
+    Projeto escolar · Protótipo de demonstração, sem envio de denúncias reais · Risco imediato: 190 · Orientação 24h: 180
+  </footer>
 
   <script src="script.js"></script>
 </body>

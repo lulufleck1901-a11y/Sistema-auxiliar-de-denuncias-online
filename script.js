@@ -31,6 +31,9 @@ const contador = document.getElementById("contador");
 const btnTema = document.getElementById("btn-tema");
 const perfilNome = document.getElementById("perfil-nome");
 const msgPerfil = document.getElementById("msg-perfil");
+const btnMenu = document.getElementById("btn-menu");
+const btnFecharMenu = document.getElementById("btn-fechar-menu");
+const fundoMenu = document.getElementById("fundo-menu");
 
 // ===== 3. NAVEGAÇÃO ENTRE TELAS =====
 // Telas "filhas" destacam no menu o botão da tela "mãe"
@@ -39,7 +42,6 @@ const menuDaTela = {
   "tela-direitos": "tela-recursos",
   "tela-canais": "tela-recursos",
   "tela-seguranca": "tela-recursos",
-  "tela-acompanhar": "tela-inicio",
   "tela-sobre": "tela-perfil"
 };
 
@@ -60,6 +62,10 @@ function mostrarTela(idDaTela) {
     botao.classList.toggle("atual", botao.dataset.tela === itemDoMenu);
   });
 
+  // No celular, o menu fecha sozinho depois de escolher uma tela
+  if (window.innerWidth < 900) { abrirMenu(false); }
+
+  if (idDaTela === "tela-inicio") { atualizarResumo(); }
   if (idDaTela === "tela-acompanhar") { atualizarAcompanhar(); }
   if (idDaTela === "tela-perfil") { perfilNome.value = ler("nomeDemo") || ""; msgPerfil.textContent = ""; }
   window.scrollTo(0, 0);
@@ -288,6 +294,7 @@ function limparDemo() {
   apagar("checklistDemo");
   carregarChecklist();
   atualizarAcompanhar();
+  atualizarResumo();
 }
 document.getElementById("btn-limpar-demo").addEventListener("click", limparDemo);
 
@@ -299,6 +306,7 @@ function atualizarProgresso() {
   caixasDoChecklist.forEach(function (caixa) { if (caixa.checked) { feitas++; } });
   document.getElementById("progresso").textContent =
     feitas + " de " + caixasDoChecklist.length + " dicas concluídas";
+  atualizarResumo();
 }
 
 // Lê do localStorage quais dicas estavam marcadas (ex.: "senhas,duas")
@@ -319,7 +327,36 @@ caixasDoChecklist.forEach(function (caixa) {
   });
 });
 
-// ===== 9. LOGOTIPO RESERVA =====
+// ===== 9. MENU (abrir e fechar) =====
+function abrirMenu(abrir) {
+  document.body.classList.toggle("menu-aberto", abrir);
+  btnMenu.setAttribute("aria-expanded", abrir ? "true" : "false");
+}
+btnMenu.addEventListener("click", function () {
+  abrirMenu(!document.body.classList.contains("menu-aberto"));
+});
+btnFecharMenu.addEventListener("click", function () { abrirMenu(false); });
+fundoMenu.addEventListener("click", function () { abrirMenu(false); });
+document.addEventListener("keydown", function (evento) {
+  if (evento.key === "Escape") { abrirMenu(false); }
+});
+
+// ===== 10. RESUMO DA TELA INICIAL (dados de demonstração) =====
+function atualizarResumo() {
+  const protocolo = ler("protocoloDemo");
+  const status = Number(ler("statusDemo")) || 0;
+  document.getElementById("resumo-denuncia").textContent =
+    protocolo ? protocolo + " · " + nomesDosStatus[status] : "Nenhuma ainda";
+
+  const marcadas = (ler("checklistDemo") || "").split(",").filter(function (item) {
+    return item !== "";
+  });
+  const total = caixasDoChecklist.length;
+  document.getElementById("resumo-seguranca").textContent = marcadas.length + " de " + total + " dicas";
+  document.getElementById("barra-seguranca").style.width = (marcadas.length / total * 100) + "%";
+}
+
+// ===== 11. LOGOTIPO RESERVA =====
 // Se o arquivo escudo.png não for encontrado, mostra um escudo desenhado em SVG.
 const desenhoDoEscudo =
   "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>" +
@@ -342,10 +379,11 @@ document.querySelectorAll("img").forEach(function (imagem) {
   imagem.addEventListener("error", function () { usarLogoReserva(imagem); }, { once: true });
 });
 
-// ===== 10. AO ABRIR A PÁGINA (inclusive depois do F5) =====
+// ===== 12. AO ABRIR A PÁGINA (inclusive depois do F5) =====
 aplicarTema(ler("tema") === "escuro");
 mostrarNome();
 mostrarEtapa(1);
 carregarChecklist();
+abrirMenu(window.innerWidth >= 900); // aberto no computador, fechado no celular
 // Se já fez o login demonstrativo antes, volta direto para o início
 if (ler("nomeDemo")) { mostrarTela("tela-inicio"); }
