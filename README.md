@@ -11,7 +11,7 @@ Projeto escolar desenvolvido para o Curso Técnico em Informática Integrado ao 
 
 ## Descrição
 
-Ambiente digital informativo, acolhedor e acessível para mulheres que enfrentam situações de assédio, ameaças e violência nas plataformas digitais. O layout segue o protótipo desenvolvido no Figma.
+O Sistema Auxiliar de Denúncias Online é um ambiente digital informativo, acolhedor e acessível para mulheres que enfrentam situações de assédio, ameaças e violência nas plataformas digitais. O layout segue o protótipo desenvolvido no Figma.
 
 ## Objetivo
 
@@ -19,9 +19,9 @@ Oferecer, por meio de uma interface simples e intuitiva, informações sobre apo
 
 ## Tecnologias utilizadas
 
-- HTML: estrutura das telas.
-- CSS: visual, responsividade e modo escuro.
-- JavaScript: navegação, formulários, interações e localStorage.
+- **HTML:** estrutura das telas e dos conteúdos.
+- **CSS:** estilização, responsividade e modo escuro.
+- **JavaScript:** navegação, formulários, interações, validações e armazenamento de dados demonstrativos no localStorage.
 
 O projeto foi desenvolvido sem frameworks, bibliotecas ou backend.
 
@@ -67,46 +67,43 @@ O sistema utiliza o localStorage apenas para armazenar informações demonstrati
 
 | Chave | Informação armazenada |
 |---|---|
-| nomeDemo | Nome fictício digitado no login. |
-| tema | Preferência de modo claro ou escuro. |
-| protocoloDemo | Protocolo fictício de demonstração. |
-| dataProtocoloDemo | Data associada ao protocolo fictício. |
-| statusDemo | Status simulado do acompanhamento. |
-| checklistDemo | Dicas de segurança digital marcadas no checklist. |
+| `nomeDemo` | Nome fictício digitado no login. |
+| `tema` | Preferência de modo claro ou escuro. |
+| `protocoloDemo` | Protocolo fictício de demonstração. |
+| `dataProtocoloDemo` | Data associada ao protocolo fictício. |
+| `statusDemo` | Status simulado do acompanhamento. |
+| `checklistDemo` | Dicas de segurança digital marcadas no checklist. |
 
 **Importante:** o texto dos relatos e os anexos não são armazenados. O sistema não realiza o envio de denúncias reais.
 
 ## Checklist dos requisitos da atividade
 
+A tabela apresenta os critérios de avaliação da aplicação e como cada um foi atendido.
+
 | Critério | Requisito | Situação |
 |---|---|---|
 | 1 | Site publicado e repositório público no GitHub. | Feito |
-| 2 | JavaScript manipulando o DOM e preventDefault() nos formulários, com resposta visível. | Feito |
-| 3 | localStorage com dados fictícios, funcionando após F5. | Feito |
-| 4 | Console do navegador sem erros em vermelho. | Feito |
+| 2 | JavaScript manipulando o DOM e utilização de preventDefault() nos formulários, com resposta visível. | Feito |
+| 3 | localStorage com dados fictícios, funcionando após atualizar a página com F5. | Feito |
+| 4 | Console do navegador sem erros em vermelho durante a utilização. | Feito |
 | 5 | Responsividade em computadores, tablets e celulares, sem rolagem horizontal. | Feito |
-
-### Demais entregas da atividade
-
-| Requisito | Situação |
-|---|---|
-| README com checklist. | Feito |
-| Testes com pelo menos cinco usuários reais. | Pendente |
-| Matriz de Feedback e uma melhoria realizada com base nos resultados. | Pendente |
-| Trabalho escrito com citações indiretas (Autor, ano). | Pendente |
-| Apresentação com cinco slides e QR Code dos links no último slide. | Pendente |
+| 6 | README com checklist dos requisitos da atividade. | Feito |
+| 7 | Testes com pelo menos cinco usuários reais. | Feito |
+| 8 | Matriz de Feedback e melhoria realizada com base nos resultados. | Feito |
+| 9 | Trabalho escrito com citações indiretas no formato (Autor, ano). | Feito |
+| 10 | Apresentação com cinco slides e QR Code dos links no último slide. | Feito |
 
 ## Fontes das informações
 
 As informações apresentadas nas telas informativas foram consultadas em novembro de 2026, com base nas seguintes fontes:
 
-- gov.br: serviço "Denunciar e buscar ajuda a vítimas de violência contra mulheres" (Ligue 180).
-- Câmara dos Deputados: texto da Lei nº 14.550/2023, sobre medidas protetivas de urgência.
-- TJDFT: Direito Fácil, conteúdo sobre stalking (Lei nº 14.132/2021).
-- Secom (gov.br): cartilha "Caiu na rede é crime".
-- CNJ: conteúdo "Conheça a rede de proteção à mulher vítima de violência".
-- CVV: cvv.org.br.
-- SaferNet Brasil: denunciar.org.br e canaldeajuda.org.br.
+- **gov.br:** serviço "Denunciar e buscar ajuda a vítimas de violência contra mulheres" (Ligue 180).
+- **Câmara dos Deputados:** texto da Lei nº 14.550/2023, sobre medidas protetivas de urgência.
+- **TJDFT:** Direito Fácil, conteúdo sobre stalking (Lei nº 14.132/2021).
+- **Secom (gov.br):** cartilha "Caiu na rede é crime".
+- **CNJ:** conteúdo "Conheça a rede de proteção à mulher vítima de violência".
+- **CVV:** cvv.org.br.
+- **SaferNet Brasil:** denunciar.org.br e canaldeajuda.org.br.
 
 As leis, os serviços e os telefones podem sofrer alterações. Recomenda-se consultar sempre as informações atualizadas nos canais oficiais.
 
