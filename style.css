@@ -61,7 +61,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
 label.marcar { display: flex; align-items: flex-start; gap: 8px; font-weight: normal; margin: 10px 0; cursor: pointer; }
-label.marcar input { width: 16px; height: 16px; margin-top: 3px; accent-color: var(--rosa); }
+label.marcar input { flex: 0 0 16px; width: 16px; height: 16px; min-height: 16px; margin: 4px 0 0; accent-color: var(--rosa); }
 .lista-simples { margin: 6px 0 0; padding-left: 20px; }
 .lista-simples li { margin-bottom: 6px; }
 
