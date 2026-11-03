@@ -67,7 +67,7 @@ function mostrarTela(idDaTela) {
 
   if (idDaTela === "tela-inicio") { atualizarResumo(); }
   if (idDaTela === "tela-acompanhar") { atualizarAcompanhar(); }
-  if (idDaTela === "tela-perfil") { perfilNome.value = ler("nomeDemo") || ""; msgPerfil.textContent = ""; }
+  if (idDaTela === "tela-perfil") { atualizarPerfil(); }
   window.scrollTo(0, 0);
 }
 
@@ -341,20 +341,48 @@ document.addEventListener("keydown", function (evento) {
   if (evento.key === "Escape") { abrirMenu(false); }
 });
 
-// ===== 10. RESUMO DA TELA INICIAL (dados de demonstração) =====
-function atualizarResumo() {
+// ===== 10. RESUMO E PERFIL (dados de demonstração) =====
+// Textos reaproveitados no resumo da tela inicial e no perfil
+function textoDaDenuncia() {
   const protocolo = ler("protocoloDemo");
   const status = Number(ler("statusDemo")) || 0;
-  document.getElementById("resumo-denuncia").textContent =
-    protocolo ? protocolo + " · " + nomesDosStatus[status] : "Nenhuma ainda";
-
-  const marcadas = (ler("checklistDemo") || "").split(",").filter(function (item) {
-    return item !== "";
-  });
-  const total = caixasDoChecklist.length;
-  document.getElementById("resumo-seguranca").textContent = marcadas.length + " de " + total + " dicas";
-  document.getElementById("barra-seguranca").style.width = (marcadas.length / total * 100) + "%";
+  return protocolo ? protocolo + " · " + nomesDosStatus[status] : "Nenhuma ainda";
 }
+
+function dicasMarcadas() {
+  return (ler("checklistDemo") || "").split(",").filter(function (item) {
+    return item !== "";
+  }).length;
+}
+
+function atualizarResumo() {
+  const marcadas = dicasMarcadas();
+  const total = caixasDoChecklist.length;
+  document.getElementById("resumo-denuncia").textContent = textoDaDenuncia();
+  document.getElementById("resumo-seguranca").textContent = marcadas + " de " + total + " dicas";
+  document.getElementById("barra-seguranca").style.width = (marcadas / total * 100) + "%";
+}
+
+function atualizarPerfil() {
+  const nome = ler("nomeDemo") || "";
+  perfilNome.value = nome;
+  document.getElementById("avatar").textContent = nome ? nome.charAt(0).toUpperCase() : "?";
+  document.getElementById("perfil-denuncia").textContent = textoDaDenuncia();
+  document.getElementById("perfil-seguranca").textContent = dicasMarcadas() + " de " + caixasDoChecklist.length + " dicas";
+  msgPerfil.textContent = "";
+}
+
+// Apaga tudo o que o site guardou neste navegador
+document.getElementById("btn-apagar-tudo").addEventListener("click", function () {
+  ["nomeDemo", "tema", "protocoloDemo", "dataProtocoloDemo", "statusDemo", "checklistDemo"].forEach(apagar);
+  campoNome.value = "";
+  campoEntendi.checked = false;
+  aplicarTema(false);
+  apagar("tema");
+  mostrarNome();
+  carregarChecklist();
+  mostrarTela("tela-bemvindo");
+});
 
 // ===== 11. LOGOTIPO RESERVA =====
 // Se o arquivo escudo.png não for encontrado, mostra um escudo desenhado em SVG.

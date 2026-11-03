@@ -32,7 +32,8 @@ Sem frameworks, bibliotecas ou backend.
 - Formulário de denúncia em 5 etapas: Ocorrido, Detalhes, Anexos, Revisão e Conclusão
 - Acompanhamento de denúncias com linha do tempo simulada (apenas protocolo fictício)
 - Apoio, rede de apoio, direitos, canais oficiais e segurança digital (com checklist que fica salvo)
-- Perfil com troca do nome de demonstração, modo claro/escuro e tela "Sobre o projeto"
+- Perfil com avatar, troca do nome de demonstração, progresso, modo claro/escuro, privacidade e botão para apagar os dados guardados
+- Cabeçalho com botão para abrir e fechar o menu e atalho para o Ligue 180
 - Menu inferior no celular e menu lateral no computador
 
 ## Estrutura de arquivos
@@ -85,6 +86,19 @@ O texto do relato e os anexos **nunca** são guardados.
 | - | Matriz de Feedback e uma melhoria feita a partir dela | Pendente |
 | - | Trabalho escrito com citações indiretas (Autor, ano) | Pendente |
 | - | 5 slides com QR Code dos links no último | Pendente |
+
+## Fontes das informações
+
+As telas informativas foram conferidas em novembro de 2026 em fontes oficiais:
+
+- gov.br: serviço "Denunciar e buscar ajuda a vítimas de violência contra mulheres" (Ligue 180)
+- Câmara dos Deputados: texto da Lei 14.550/2023 (medidas protetivas de urgência)
+- TJDFT: Direito Fácil, "Stalking" (Lei 14.132/2021)
+- Secom (gov.br): cartilha "Caiu na rede é crime"
+- CNJ: "Conheça a rede de proteção à mulher vítima de violência"
+- CVV (cvv.org.br) e SaferNet Brasil (denunciar.org.br e canaldeajuda.org.br)
+
+As leis e os telefones podem mudar. Confira sempre a versão atual nos sites oficiais.
 
 ## Autoria
 
