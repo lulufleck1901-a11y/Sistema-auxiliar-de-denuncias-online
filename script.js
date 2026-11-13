@@ -1,10 +1,3 @@
-// =====================================================
-// Sistema Auxiliar de Denúncias Online - script.js
-// Importante: o localStorage guarda SÓ dados de demonstração
-// (nome fictício, tema, protocolo fictício e checklist de dicas).
-// Relatos e anexos NUNCA são guardados.
-// =====================================================
-
 // ===== 1. FUNÇÕES DO localStorage =====
 // O try/catch evita erro no Console se o navegador bloquear o armazenamento.
 function salvar(chave, valor) {
